@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#ffc4a4"/>
+  <text x="400" y="300" font-family="Arial, sans-serif" font-size="24" fill="#d2691e" text-anchor="middle">
+    2020s: Current Conflicts
+  </text>
+  <text x="400" y="330" font-family="Arial, sans-serif" font-size="16" fill="#cd5c5c" text-anchor="middle">
+    (Placeholder - Add conflict zones map)
+  </text>
+</svg>
