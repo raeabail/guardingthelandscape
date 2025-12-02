@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Background – Camp Atterbury</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV BAR -->
+  <header class="site-header">
+    <a href="index.html" class="logo-link">
+      <img src="images/SISL_logo.png" alt="Camp Atterbury Logo" class="site-logo" />
+    </a>
+    <nav class="main-nav">
+      <a href="background.html" class="active">Background</a>
+      <a href="encroachment.html">Encroachment</a>
+      <a href="priorityspecies.html">Priority Species</a>
+      <a href="extremeweather.html">Extreme Weather</a>
+    </nav>
+  </header>
+
+  <!-- BACKGROUND SECTION -->
+  <section class="section" id="backgroundSection">
+    <div class="background-flex">
+      <div class="background-text-block">
+  <h2 class="background-title">Background</h2>
+        <p class="background-text">
+          Camp Atterbury, established in <b>1942</b> on 40,000 acres of farms and small communities in <b>Johnson, Bartholomew, and Brown Counties</b>, has long served as a training hub for the 
+          <b>Indiana National Guard and numerous other military personnel from multiple branches</b>. While the installation preserved large interior blocks of land from private development, 
+          the surrounding counties have steadily transformed. Farmland giving way to suburban sprawl in Johnson County, moderate growth along the I-65 and US Highway 31 corridors in Bartholomew, 
+          and low-density rural development in Brown County. These shifts shape the challenges of today: <b>balancing military readiness, ecological conservation, and community resilience</b> in the face of accelerating land use change and extreme weather.
+          <br><br>
+          To explore these challenges more clearly, the following sections trace three themes: <strong>encroachment through incompatible land use, priority species, and extreme weather</strong>, 
+          each with its own timeline connecting the past, present, and future.
+        </p>
+      </div>
+      <div class="background-divider"></div>
+      <div class="background-image">
+     <img id="fieldMapThumb"
+       src="images/FieldCardMap_2021_96ppi.png"
+       srcset="images/FieldCardMap_2021_96ppi.png 1x, images/FieldCardMap_2021_192ppi.png 2x"
+  sizes="(max-width: 900px) 320px, 360px"
+       loading="lazy"
+       alt="Field Map of Camp Atterbury" />
+        <div class="background-image-caption">Field Map of Camp Atterbury (2021)</div>
+      </div>
+    </div>
+
+    <script>
+      const fieldMapThumb = document.getElementById('fieldMapThumb');
+      if (fieldMapThumb) {
+        fieldMapThumb.addEventListener('click', function () {
+          let modal = document.createElement('div');
+          modal.style.position = 'fixed';
+          modal.style.top = 0;
+          modal.style.left = 0;
+          modal.style.width = '100vw';
+          modal.style.height = '100vh';
+          modal.style.background = 'rgba(0,0,0,0.7)';
+          modal.style.display = 'flex';
+          modal.style.alignItems = 'center';
+          modal.style.justifyContent = 'center';
+          modal.style.zIndex = 9999;
+          modal.innerHTML = `<div role="dialog" aria-label="Field map modal" style='background:#fff; padding:16px; border-radius:14px; max-width:96vw; max-height:96vh; overflow:auto;'>
+            <img src='images/FieldCardMap_2021_96ppi.png' alt='Field Map of Camp Atterbury (full size)' style='display:block; width:auto; height:auto; max-width:none; max-height:none; border-radius:10px; box-shadow:none;' />
+          </div>`;
+          modal.addEventListener('click', function () {
+            document.body.removeChild(modal);
+          });
+          document.body.appendChild(modal);
+        });
+      }
+    </script>
+  </section>
+
+  <div class="page-nav-buttons">
+    <a href="index.html" class="nav-btn">←  Start Page</a>
+    <a href="encroachment.html" class="nav-btn">Encroachment  →</a>
+  </div>
+
+</body>
+</html>
