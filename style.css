@@ -900,6 +900,45 @@ aside.sticky { position: sticky; top: calc(var(--header-height) + 16px); }
 }
 .eva-btn:hover { background: #3d643d; }
 
+.static-map-image {
+  max-width: 90%;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  object-fit: contain; /* prevents stretching */
+  display: block;
+  margin: auto;
+}
+
+#mapDisplay {
+  display: flex;
+  align-items: center;   /* vertical centering */
+  justify-content: center; /* horizontal centering */
+}
+
+.embedded-map-container {
+  width: 100%;
+  height: 95vh;   /* ← make the map significantly larger */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  margin: 1.5rem 0;
+}
+
+.embedded-map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.batcaption {
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: -0.5rem;
+  text-align: center;
+  line-height: 1.4;
+}
+
 /* =========================================================
    EVA MODAL — BACKDROP & POSITIONING  (YOUR ORIGINAL CODE)
 ========================================================= */
@@ -1439,7 +1478,7 @@ aside.sticky { position: sticky; top: calc(var(--header-height) + 16px); }
 	font-weight: 700;
 }
 .narrative {
-	max-width: 1000px;
+	max-width: 100%;
 	margin: 0 auto 2.5rem auto;
 	color: #22302a;
 	font-size: 1.08rem;
@@ -1516,7 +1555,7 @@ aside.sticky { position: sticky; top: calc(var(--header-height) + 16px); }
 .card-face { border-radius: 1rem; box-shadow: 0 10px 25px rgba(0,0,0,.08); height: 100%; width: 100%; overflow: hidden; backface-visibility: hidden; transform-style: preserve-3d; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
 .card-front { background-size: cover; background-position: center; display: flex; align-items: flex-end; justify-content: center; position: relative; }
 .overlay.bottom-overlay { position: absolute; bottom: 0; width: 100%; background: rgba(255, 255, 255, 0.85); color: #111827; text-align: center; padding: 0.75rem 1rem; backdrop-filter: blur(5px); }
-.species-name { margin: 0; font-size: 1.3rem; font-weight: 600; line-height: 1.4; }
+.species-name { margin: 0; font-size: 1.3rem; font-weight: 700; line-height: 1.4; }
 .species-name .highlight { background-color: #d8eacc; padding: 0.25rem 0.5rem; border-radius: 0.4rem; }
 .card-back { position: absolute; inset: 0; background: #fafafa; color: #1e293b; transform: rotateY(180deg); overflow-y: auto; display: flex; justify-content: center; align-items: center; }
 .flip[aria-expanded="true"] .card-front { transform: rotateY(180deg); }
