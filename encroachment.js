@@ -112,11 +112,11 @@ if (mapDisplay && steps.length) {
   let currentStep = null;
 
   const MAP_CAPTIONS = {
-    "1940s": "By 1960, aerial imagery and land cover data depict a landscape dominated by agriculture on the north, east, and south sides of Camp Atterbury, contrasted by intact forest and natural buffers to the west.",
-    "1970s": "The 1980-today land use comparison shows how early lake developments evolved into dense residential clusters, fragmenting what had been an uninterrupted forest landscape.",
-    "2000s": "Encroachment patterns emerge as new subdivisions and commercial zones expand toward Camp Atterbury, converting farmland and reducing habitat connectivity during the 2000s–2010s.",
-    "2010s": "Floodplain (100-yr + 500-yr) overlaid on the proposed SR-46 rezoning map reveals areas where new residential districts would extend into flood-fringe zones, increasing long-term flood-management costs and ecological impacts.",
-    "2050": "Side-by-side Farms Under Threat 2040 scenarios show how business-as-usual growth patterns could intensify sprawl across Indiana while strategic zoning and conservation investments dramatically slow farmland loss."
+    "1940s": "By 1960, aerial imagery and land-cover data depict a landscape dominated by agriculture...",
+    "1970s": "The 1980–today land-use comparison shows how early lake developments evolved...",
+    "2000s": "Encroachment patterns emerge as subdivisions expand during the 2000s–2010s...",
+    "2010s": "Floodplain overlays illustrate areas where new districts extend into flood-fringe zones...",
+    "2050": "Farms Under Threat 2040 scenarios show how sprawl could intensify without intervention."
   };
 
   const captionEl = document.getElementById("mapCaption");
@@ -272,88 +272,74 @@ window.addEventListener("load", updateStickyScrollHeight);
 window.addEventListener("resize", updateStickyScrollHeight);
 
 
+
 /* ---------------------------------------------------------
-   EVA INTERACTIVE MAP + SUMMARY SYSTEM (FIXED)
+   ⭐ 11. FIXED + CLEANED EVA MODAL LOGIC ⭐
 --------------------------------------------------------- */
 
-  const evaModal = document.getElementById("evaModal");
-  const evaLaunch = document.getElementById("evaLaunch");
+const evaModal = document.getElementById("evaModal");
+const evaDefault = evaModal.querySelector(".eva-default");
+const evaBody = evaModal.querySelector(".eva-body");
 
-  /* --------------------------------------------
-     A. OPEN DEFAULT EVA "INTERACTIVE MAP" MODAL
-  -------------------------------------------- */
-document.querySelectorAll("button[data-eva]").forEach(btn => {
+// OPEN: Interactive Map
+document.querySelectorAll(".eva-btn").forEach(btn => {
   btn.addEventListener("click", () => {
-
     const link = btn.dataset.eva;
 
-    if (!link) {
-      console.error("Missing EVA link on button:", btn);
-      return;
-    }
+    evaDefault.style.display = "block";
+    evaBody.style.display = "none";
+    evaBody.innerHTML = "";
 
-    // Store link for Launch Map button
-    evaLaunch.dataset.link = link;
+    evaModal.classList.add("visible");
+    document.body.style.overflow = "hidden";
 
-    // Reset modal view
-    evaModal.querySelector(".eva-default").style.display = "block";
-    evaModal.querySelector(".eva-body").style.display = "none";
+    document.getElementById("evaLaunch").onclick = () => {
+      const w = 1400, h = 900;
+      const left = (screen.width - w) / 2;
+      const top = (screen.height - h) / 2;
+
+      window.open(
+        link, "_blank",
+        `toolbar=no,location=no,status=no,menubar=no,
+         scrollbars=yes,resizable=yes,width=${w},height=${h},
+         top=${top},left=${left}`
+      );
+    };
+  });
+});
+
+
+// OPEN: Summary Results
+document.querySelectorAll("[data-eva-summary]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const county = btn.getAttribute("data-eva-summary");
+
+const EVA_TEXT = { brown: `<h3>Brown County – Low–Moderate Development Pressure <span class="eva-cite" title="Source: MRLC EVA Land Cover Change Report (1985–2024)"></span> </h3> <h4>Landscape Change Summary</h4> <ul> <li>Brown County experienced <b>5.55% total land cover change</b> from 1985–2024—one of the lowest rates among surrounding counties.</li> <li>The county remains <b>predominantly deciduous forest</b> in both 1985 and 2024, with forest still forming the dominant land cover class.</li> <li>Most land cover transitions involve <b>forest converting to low-density development</b>, shrub/grassland, or lightly modified rural residential areas.</li> <li><b>High-intensity development (HID)</b> remains extremely limited in extent.</li> <li>Red change pixels in EVA maps cluster primarily around <b>lake communities and ridge-top parcels</b>, matching dispersed, amenity-driven patterns.</li> </ul> <h4>Encroachment Relevance</h4> <ul> <li>Brown County’s change is <b>fragmented but low-intensity</b>, contributing modest encroachment pressure on Atterbury’s western edge.</li> <li>Forest thinning and rural home expansion affect <b>habitat connectivity</b> more than training-area buffers.</li> <li>Because development does not follow transportation corridors, its influence is <b>diffuse</b> rather than corridor-driven.</li> </ul>`, johnson: `<h3>Johnson County – Highest Development Pressure <span class="eva-cite" title="Source: MRLC EVA Land Cover Change Report (1985–2024)"></span> </h3> <h4>Landscape Change Summary</h4> <ul> <li>Johnson County shows the <b>highest land cover change</b> of the three counties, with <b>11.16% of its area changing</b> between 1985 and 2024.</li> <li>EVA shows strong increases across <b>most development categories</b>, indicating broad suburban and industrial expansion.</li> <li>Red EVA change pixels are highly concentrated around <b>Greenwood, Whiteland, New Whiteland, and Franklin</b>.</li> <li>Large areas of <b>cropland and open space</b> converted into developed categories.</li> <li>Several wooded tracts transitioned into <b>shrub/grassland or developed open space</b>, indicating incremental forest loss.</li> </ul> <h4>Encroachment Relevance</h4> <ul> <li>Johnson County exerts the <b>strongest encroachment pressure</b> on Camp Atterbury, particularly along the north and northeast boundaries.</li> <li>Growth along <b>I-65 and US-31</b> moves population closer to Atterbury’s training zones.</li> <li>Increasing impervious surface near Atterbury contributes to <b>stormwater, lighting, and noise spillover</b> into buffer areas.</li> <li>Loss of agricultural transition zones reduces landscape separation between <b>training activities and residential communities</b>.</li> </ul>`, bartholomew: `<h3>Bartholomew County – Moderate–High Development Pressure <span class="eva-cite" title="Source: MRLC EVA Land Cover Change Report (1985–2024)"></span> </h3> <h4>Landscape Change Summary</h4> <ul> <li>Bartholomew County experienced <b>6.13% total land cover change</b> from 1985–2024.</li> <li>Developed categories all <b>increased</b>, though less dramatically than in Johnson County.</li> <li>EVA change pixels cluster around <b>Columbus</b>, especially west, northwest, and along major corridors.</li> <li>Agricultural areas show gradual transition into <b>developed open space and low-density residential</b>.</li> <li>Forest conversion occurs in scattered patches, typically shifting to <b>pasture/hay, shrub/grassland, or low-density development</b>.</li> </ul> <h4>Encroachment Relevance</h4> <ul> <li>Bartholomew contributes <b>moderate encroachment pressure</b>, especially along the western Columbus-to-Atterbury interface.</li> <li>SR-46 and US-31 corridor development incrementally narrows <b>buffer space</b> between Columbus and Atterbury.</li> <li>Changes near flood-prone corridors may influence <b>hydrology, runoff, and ecological constraints</b> adjacent to training lands.</li> </ul>` };
+
+    evaDefault.style.display = "none";
+    evaBody.style.display = "block";
+    evaBody.innerHTML = EVA_TEXT[county];
 
     evaModal.classList.add("visible");
     document.body.style.overflow = "hidden";
   });
 });
 
-  /* --------------------------------------------
-     B. LAUNCH MAP → ALWAYS OPEN IN NEW TAB
-        (MRLC-SAFE)
-  -------------------------------------------- */
-  evaLaunch.addEventListener("click", () => {
-    const link = evaLaunch.dataset.link;
-    window.open(link, "_blank");     // Safe for MRLC — avoids iframe/popup restrictions
-  });
 
-  const EVA_TEXT = { brown: `<h3>Brown County – Low–Moderate Development Pressure <span class="eva-cite" title="Source: MRLC EVA Land Cover Change Report (1985–2024)"></span> </h3> <h4>Landscape Change Summary</h4> <ul> <li>Brown County experienced <b>5.55% total land cover change</b> from 1985–2024—one of the lowest rates among surrounding counties.</li> <li>The county remains <b>predominantly deciduous forest</b> in both 1985 and 2024, with forest still forming the dominant land cover class.</li> <li>Most land cover transitions involve <b>forest converting to low-density development</b>, shrub/grassland, or lightly modified rural residential areas.</li> <li><b>High-intensity development (HID)</b> remains extremely limited in extent.</li> <li>Red change pixels in EVA maps cluster primarily around <b>lake communities and ridge-top parcels</b>, matching dispersed, amenity-driven patterns.</li> </ul> <h4>Encroachment Relevance</h4> <ul> <li>Brown County’s change is <b>fragmented but low-intensity</b>, contributing modest encroachment pressure on Atterbury’s western edge.</li> <li>Forest thinning and rural home expansion affect <b>habitat connectivity</b> more than training-area buffers.</li> <li>Because development does not follow transportation corridors, its influence is <b>diffuse</b> rather than corridor-driven.</li> </ul>`, johnson: `<h3>Johnson County – Highest Development Pressure <span class="eva-cite" title="Source: MRLC EVA Land Cover Change Report (1985–2024)"></span> </h3> <h4>Landscape Change Summary</h4> <ul> <li>Johnson County shows the <b>highest land cover change</b> of the three counties, with <b>11.16% of its area changing</b> between 1985 and 2024.</li> <li>EVA shows strong increases across <b>most development categories</b>, indicating broad suburban and industrial expansion.</li> <li>Red EVA change pixels are highly concentrated around <b>Greenwood, Whiteland, New Whiteland, and Franklin</b>.</li> <li>Large areas of <b>cropland and open space</b> converted into developed categories.</li> <li>Several wooded tracts transitioned into <b>shrub/grassland or developed open space</b>, indicating incremental forest loss.</li> </ul> <h4>Encroachment Relevance</h4> <ul> <li>Johnson County exerts the <b>strongest encroachment pressure</b> on Camp Atterbury, particularly along the north and northeast boundaries.</li> <li>Growth along <b>I-65 and US-31</b> moves population closer to Atterbury’s training zones.</li> <li>Increasing impervious surface near Atterbury contributes to <b>stormwater, lighting, and noise spillover</b> into buffer areas.</li> <li>Loss of agricultural transition zones reduces landscape separation between <b>training activities and residential communities</b>.</li> </ul>`, bartholomew: `<h3>Bartholomew County – Moderate–High Development Pressure <span class="eva-cite" title="Source: MRLC EVA Land Cover Change Report (1985–2024)"></span> </h3> <h4>Landscape Change Summary</h4> <ul> <li>Bartholomew County experienced <b>6.13% total land cover change</b> from 1985–2024.</li> <li>Developed categories all <b>increased</b>, though less dramatically than in Johnson County.</li> <li>EVA change pixels cluster around <b>Columbus</b>, especially west, northwest, and along major corridors.</li> <li>Agricultural areas show gradual transition into <b>developed open space and low-density residential</b>.</li> <li>Forest conversion occurs in scattered patches, typically shifting to <b>pasture/hay, shrub/grassland, or low-density development</b>.</li> </ul> <h4>Encroachment Relevance</h4> <ul> <li>Bartholomew contributes <b>moderate encroachment pressure</b>, especially along the western Columbus-to-Atterbury interface.</li> <li>SR-46 and US-31 corridor development incrementally narrows <b>buffer space</b> between Columbus and Atterbury.</li> <li>Changes near flood-prone corridors may influence <b>hydrology, runoff, and ecological constraints</b> adjacent to training lands.</li> </ul>` };
+// CLOSE MODAL (single clean implementation)
+function closeEVA() {
+  evaModal.classList.remove("visible");
+  document.body.style.overflow = "";
 
-    document.querySelectorAll("[data-eva-summary]").forEach(btn => {
-    btn.addEventListener("click", () => {
+  evaDefault.style.display = "block";
+  evaBody.style.display = "none";
+  evaBody.innerHTML = "";
+}
 
-      const county = btn.dataset.evaSummary;
+evaModal.querySelector(".eva-close").onclick = closeEVA;
+evaModal.querySelector(".eva-overlay").onclick = closeEVA;
+document.addEventListener("keydown", e => e.key === "Escape" && closeEVA());
 
-      const body = evaModal.querySelector(".eva-body");
-      const defaultView = evaModal.querySelector(".eva-default");
-
-      // Insert summary text
-      body.innerHTML = EVA_TEXT[county];
-
-      // Switch views
-      defaultView.style.display = "none";
-      body.style.display = "block";
-
-      // Show modal
-      evaModal.classList.add("visible");
-      document.body.style.overflow = "hidden";
-    });
-  });
-
-  /* --------------------------------------------
-     D. CLOSE MODAL
-  -------------------------------------------- */
-  function closeEVAModal() {
-    evaModal.classList.remove("visible");
-    document.body.style.overflow = "";
-
-    // Reset to default view
-    evaModal.querySelector(".eva-default").style.display = "block";
-    evaModal.querySelector(".eva-body").style.display = "none";
-  }
-
-  evaModal.querySelector(".eva-close").onclick = closeEVAModal;
-  evaModal.querySelector(".eva-overlay").onclick = closeEVAModal;
-
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") closeEVAModal();
-  });
 
 
 /* ---------------------------------------------------------
