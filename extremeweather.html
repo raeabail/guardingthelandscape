@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Extreme Weather – Camp Atterbury</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <a href="index.html" class="logo-link">
+      <img src="images/SISL_logo.png" alt="Camp Atterbury Logo" class="site-logo" />
+    </a>
+    <nav class="main-nav">
+      <a href="background.html">Background</a>
+      <a href="encroachment.html">Encroachment</a>
+      <a href="priorityspecies.html">Priority Species</a>
+      <a href="extremeweather.html" class="active">Extreme Weather</a>
+    </nav>
+  </header>
+
+  <!-- INTRO -->
+  <section class="intro-section fade-in">
+    <h1 class="page-title">Extreme Weather</h1>
+    <p class="page-subtitle">When Water, Wind, and Development Collide</p>
+    <div class="intro-text">
+      <p>
+        Intensifying rainfall, stronger wind events, and expanding floodplains are reshaping how both the installation 
+        and surrounding communities prepare for and recover from storms. What were once routine seasonal floods 
+        now bring higher runoff, faster flows, and growing pressure on local infrastructure and training lands.
+      </p>
+      <br>
+      <p>
+        Across <strong>Johnson, Brown, and Bartholomew Counties</strong>, development has replaced forests and farmland 
+        with hard surfaces that accelerate water movement and magnify damage. As weather extremes collide with expanding 
+        urban footprints, the region faces a new reality: resilience depends on understanding how water, wind, and land use 
+        interact across boundaries. This page traces that story from historic baselines to projected future risks.
+      </p>
+    </div>
+
+    <a href="#timeline" class="scroll-cue" style="margin-top: 50px;">▼ Explore the Timeline ▼</a>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="section section-alt">
+    <!-- Timeline (sticky map + right-side steps like Priority Species) -->
+    <section id="timeline" class="section timeline-wrap fade-in">
+      <div class="timeline">
+        <div class="sticky-map">
+          <!-- mapDisplay is used by timeline JS to host images/videos/maps -->
+          <div id="mapDisplay" class="map-placeholder">LOADING</div>
+          <div id="mapCaption" class="map-caption-dynamic"></div>
+        </div>
+
+      <div class="timeline-steps">
+        <div class="timeline-step" data-step="pre1980">
+          <h3>Pre-1980s: A Naturally Buffered Watershed</h3>
+          <ul>
+            <li>Flooding was largely confined to natural river systems, primarilythe East Fork White River and Salt Creek tributaries surrounding Camp Atterbury.</li>
+            <li>Rural farmland and forest cover dominated the watershed, allowing rainfall to infiltrate soils, recharge groundwater, and slow surface runoff.</li>
+            <li>Natural flood buffering reduced storm impacts, with wetlands, riparian corridors, and undeveloped floodplains absorbing excess water during heavy precipitation events.</li>
+            <li>Military training areas were rarely affected by major storms, with minimal infrastructure at risk.</li>
+            <li>Historic flood documentation from the U.S. Geological Survey shows that even during extreme precipitation events, flood impacts were concentrated along established river corridors rather than across the broader landscape as shown in the map to the right. </li>
+          </ul>
+        </div>
+
+        <div class="timeline-step" data-step="2000s">
+          <h3>1980s–2000s: Eroding the Buffer</h3>
+          <ul>
+            <li>Storm intensity and seasonal rainfall variability increased, with more frequent high-intensity precipitation events, producing sharper runoff peaks.</li>
+            <li>Although total annual rainfall changed modestly, shifts in storm timing and intensity placed increasing stress on local drainage networks with higher peak storm events becoming more common.</li>
+            <li>Rapid suburban and exurban growth in Johnson and Bartholomew Counties transformed large areas of farmland and forest into residential subdivisions, commercial corridors, and transportation infrastructure, replacing permeable soils with subdivisions and paved surfaces.</li>
+            <li>As illustrated in the map to the left, upstream development increased runoff efficiency, routing rainfall more quickly toward Camp Atterbury’s lowlands and contributing to higher average monthly discharge and flooding conflicts with training operations.</li>
+            <li>By the late 2000s, these shifting extreme weather patterns and land-use changes were no longer abstract trends, but conditions under which extreme weather events could directly affect installation operations.</li>
+          </ul>
+            <button class="timeline-case-btn" data-case="case-tornado2008-modal">
+              <svg class="pin-icon" width="18" height="18" viewBox="0 0 24 24">
+                <path d="M12 2l3 7h7l-5.5 4.2L18 21l-6-4-6 4 1.5-7.8L2 9h7z"
+                  fill="currentColor"/>
+              </svg>
+              Case Study: Tornado Impacts at Camp Atterbury (June 2008)
+            </button>
+        </div>
+
+        <div class="timeline-step" data-map="images/flood-expansion.jpg">
+          <h3>2010s–2020s: From Occasional Flooding to Recurring Disruption</h3>
+          <ul>
+            <li>Mapped FEMA floodplain boundaries expanded along the East Fork White River, extending closer to, and in some areas directly adjacent to, Camp Atterbury’s perimeter, reflecting increased flood exposure under contemporary hydrologic conditions.</li>
+            <li>Localized flash floodings increasingly affected training access roads and riparian zones corridors, and low-lying areas within the installation buffer area, disrupting site access and limiting the usability of flood-prone training zones during and after major storm events.</li>
+            <li>Regional stormwater systems were increasingly tested by high-intensity rainfall and interacting with expanded impervious surface runoff, resulting in faster runoff delivery, higher peak flows, and reduced system capacity during extreme precipitation events.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-step" data-step="2020s">
+          <h3>2020s: Managing Extreme Weather in Real Time</h3>
+          <ul>
+            <li>Continued suburban expansion in Franklin, Edinburgh, and Columbus has intensified regional exposure to multiple extreme weather hazards, increasing impervious surface coverage and placing greater strain on stormwater, transportation, and utility infrastructure during heavy rainfall and severe storm events.</li>
+            <li>Camp Atterbury’s perimeter now lies at the convergence of several extreme weather stressors, including mapped floodplains, concentrated stormwater runoff pathways, and corridors exposed to high winds and storm activity.</li>
+            <li>Frequent heavy rainfall events disrupt training schedules and limit vehicle access, particularly in low-lying roads and riparian corridors, while also amplifying flash flood risk during short-duration, high-intensity storms.</li>
+            <li>Severe convective storms, including tornado-producing systems, introduce short-notice operational disruptions, such as high winds, debris hazards, power outages, and safety restrictions that affect both training and administrative functions.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-step" data-map="images/projected-future.jpg">
+          <h3>2050 & Beyond: Intensifying Extreme Weather Risk</h3>
+          <ul>
+            <li>Projections for southern Indiana consistently indicate wetter conditions by mid-century, with annual precipitation increases on the order of approximately 15-25% and a disproportionate rise in heavy precipitation events that intensify runoff generation and stormwater loading across the region.</li>
+            <li>More frequent and intense storm events are expected to increase peak flows, flash flooding, and backwater effects, particularly along the East Fork White River and connected tributaries, potentially extending flood exposure into Camp Atterbury’s southern training ranges and low-lying operational areas.</li>
+            <li>Future extreme weather risk is expected to be compounded by continued land use change, as ongoing suburban and exurban development increases impervious surface coverage and reduces landscape infiltration capacity in upstream and adjacent watersheds.</li>
+            <li>Severe convective storms, including high wind and tornado-producing systems, are projected to remain a persistent regional hazard, sustaining short-notice risks to infrastructure, power systems, access routes, and training continuity.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section id="flood-overlay" class="interactive-section fade-in story-section">
+  <h2>Floodplain Development</h2>
+  <p class="lead">
+    Mapping <strong>500-year flood zones</strong> and <strong>floodways</strong> alongside 
+    <strong>building footprints</strong> reveals how development has expanded into flood-prone areas 
+    across the <strong>Camp Atterbury region</strong>. 
+    Each county illustrates different challenges—from steep terrain and flash flooding in Brown County 
+    to urban expansion pressures in Johnson and Bartholomew Counties.
+  </p>
+
+  <div class="map-container">
+    <!-- County Toggle Buttons -->
+    <div class="map-layer-buttons county-buttons">
+      <button onclick="showCountyMap('johnson')">Johnson County</button>
+      <button onclick="showCountyMap('brown')">Brown County</button>
+      <button onclick="showCountyMap('bartholomew')">Bartholomew County</button>
+    </div>
+
+    <!-- County Map Images -->
+    <div id="johnson" class="county-map active">
+      <img src="images/flood_johnson.png" alt="Johnson County Floodplain Map" class="county-image">
+    </div>
+
+    <div id="brown" class="county-map">
+      <img src="images/flood_brown.png" alt="Brown County Floodplain Map" class="county-image">
+    </div>
+
+    <div id="bartholomew" class="county-map">
+      <img src="images/flood_bartholomew.png" alt="Bartholomew County Floodplain Map" class="county-image">
+    </div>
+  </div>
+
+  <div class="dashboard-description">
+    <p>
+      These maps display FEMA’s <strong>500-year flood hazard zones</strong> (light red), 
+      <strong>approximate and DNR-approved floodways</strong> (blue tones), 
+      and local <strong>building footprints</strong>.  
+      Together, they highlight where residential and commercial development overlap flood-susceptible corridors.
+    </p>
+    <ul>
+      <li><strong>Johnson County:</strong> Rapid suburban expansion in Franklin and Greenwood overlaps with floodplains along Youngs and Hurricane Creeks.</li>
+      <li><strong>Brown County:</strong> Rugged terrain channels runoff into narrow valleys, increasing localized flood potential even outside FEMA zones.</li>
+      <li><strong>Bartholomew County:</strong> The East Fork White River floodway intersects growth zones around Columbus, emphasizing long-term mitigation needs.</li>
+    </ul>
+  </div>
+</section>
+
+<style>
+.map-container {
+  width: 95%;
+  max-width: 1400px;
+  margin: 2rem auto;
+  text-align: center;
+}
+.map-layer-buttons.county-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.map-layer-buttons.county-buttons button {
+  background-color: #6b8e23;
+  color: #fff;
+  border: none;
+  border-radius: 0.4rem;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+.map-layer-buttons.county-buttons button:hover,
+.map-layer-buttons.county-buttons button.active {
+  background-color: #55731a;
+  transform: translateY(-1px);
+}
+.county-map {
+  display: none;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+.county-map.active {
+  display: block;
+  opacity: 1;
+}
+.county-image {
+  width: 100%;
+  max-width: 1200px;
+  border-radius: 0.75rem;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+}
+.dashboard-description {
+  max-width: 1100px;
+  margin: 2rem auto 3rem;
+  background: #f9fafb;
+  border-left: 4px solid #6b8e23;
+  border-radius: 0.75rem;
+  padding: 1.75rem 2rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+.dashboard-description ul {
+  margin: 1rem 0 1.25rem 1.5rem;
+  line-height: 1.65;
+  color: #2b3645;
+}
+.dashboard-description li strong {
+  color: #22302a;
+}
+</style>
+
+<script>
+function showCountyMap(countyId) {
+  // Hide all maps
+  document.querySelectorAll('.county-map').forEach(map => {
+    map.classList.remove('active');
+  });
+
+  // Remove active button styling
+  document.querySelectorAll('.county-buttons button').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  // Show selected map
+  const selectedMap = document.getElementById(countyId);
+  selectedMap.classList.add('active');
+
+  // Highlight selected button
+  event.target.classList.add('active');
+}
+</script>
+</section>
+
+<style>
+.map-container {
+  width: 95%;
+  max-width: 1400px;
+  margin: 2rem auto;
+  text-align: center;
+}
+.map-layer-buttons.county-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.map-layer-buttons.county-buttons button {
+  background-color: #6b8e23;
+  color: white;
+  border: none;
+  border-radius: 0.4rem;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.map-layer-buttons.county-buttons button:hover,
+.map-layer-buttons.county-buttons button.active {
+  background-color: #55731a;
+}
+.county-map {
+  display: none;
+  width: 100%;
+}
+.county-map.active {
+  display: block;
+}
+.dashboard-description {
+  max-width: 1100px;
+  margin: 2rem auto 3rem;
+  background: #f9fafb;
+  border-left: 4px solid #6b8e23;
+  border-radius: 0.75rem;
+  padding: 1.75rem 2rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+.dashboard-description ul {
+  margin: 1rem 0 1.25rem 1.5rem;
+  line-height: 1.65;
+  color: #2b3645;
+}
+.dashboard-description li strong {
+  color: #22302a;
+}
+</style>
+
+<script>
+function showCountyMap(countyId) {
+  // Hide all maps
+  document.querySelectorAll('.county-map').forEach(map => map.classList.remove('active'));
+  // Remove active button styling
+  document.querySelectorAll('.county-buttons button').forEach(btn => btn.classList.remove('active'));
+  // Show selected map
+  document.getElementById(countyId).classList.add('active');
+  // Highlight selected button
+  event.target.classList.add('active');
+}
+</script>
+
+
+<section id="wind-overlay" class="interactive-section fade-in story-section">
+  <h2>Severe Wind and Storm Paths</h2>
+
+  <p class="lead">
+    The <strong>Indiana Department of Homeland Security (IDHS)</strong> developed this dashboard using verified data from the 
+    <strong>NOAA Storm Prediction Center (SPC)</strong>, covering tornado and severe wind events across Indiana from 
+    <strong>1950 through 2024</strong>. This resource highlights where storm paths most frequently occur—offering a 
+    long-term perspective on regional exposure and shared vulnerabilities across Indiana Counties.
+  </p>
+
+  <div class="dashboard-container">
+    <iframe 
+      src="https://www.arcgis.com/apps/dashboards/629098676987458fa9969dae86c87d6b" 
+      width="100%" 
+      height="720" 
+      style="border:none; border-radius: 0.75rem; box-shadow: 0 5px 25px rgba(0,0,0,0.1);" 
+      allowfullscreen
+      loading="lazy"
+    ></iframe>
+  </div>
+
+  <div class="dashboard-description">
+    <p>
+      Information in this dashboard was directly sourced from NOAA’s <strong>Storm Prediction Center (SPC)</strong>. 
+      The latest dataset of tornado tracks is valid for years <strong>1950–2024</strong>.  
+      Data are fully interactive and dynamically linked across the available tabs.
+    </p>
+
+    <h4>Interactive Tabs & Features</h4>
+    <ul>
+      <li><strong>Tornado Track Map</strong> – Displays spatial paths of tornadoes with hover-based attributes.</li>
+      <li><strong>Tornado Stats</strong> – Summarizes magnitude, injuries, and fatalities by classification.</li>
+      <li><strong>Tornadoes by Month</strong> – Visualizes seasonal variability and peak storm months.</li>
+      <li><strong>Tornadoes by Year</strong> – Tracks long-term frequency and intensity trends.</li>
+      <li><strong>Tornado Totals Map</strong> – Aggregates events by county for cumulative exposure analysis.</li>
+      <li><strong>County List with Totals</strong> – Provides sortable metrics by jurisdiction.</li>
+    </ul>
+
+    <p>
+      Click on any <strong>data element</strong> (map feature, chart bar, or table record) to highlight and 
+      cross-filter connected views. Click again to <strong>reset and de-select</strong> for a full-state overview.  
+      Together, these layers allow users to explore <strong>decades of severe storm activity</strong> and 
+      assess evolving risk patterns relevant to <strong>resilience planning and hazard mitigation</strong>.
+    </p>
+  </div>
+</section>
+
+<style>
+.dashboard-container {
+  width: 95%;
+  max-width: 1400px;
+  margin: 2rem auto;
+}
+
+.dashboard-description {
+  max-width: 1100px;
+  margin: 2rem auto 3rem;
+  background: #f9fafb;
+  border-left: 4px solid #6b8e23;
+  border-radius: 0.75rem;
+  padding: 1.75rem 2rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.dashboard-description h4 {
+  color: #22302a;
+  margin-top: 1.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.dashboard-description ul {
+  margin: 1rem 0 1.25rem 1.5rem;
+  line-height: 1.65;
+  color: #2b3645;
+}
+
+.dashboard-description li strong {
+  color: #22302a;
+}
+
+.dashboard-description p {
+  color: #2b3645;
+  line-height: 1.7;
+}
+</style>
+
+  <!-- CASE STUDIES -->
+    <!-- CASE STUDIES -->
+<section class="interactive-section fade-in story-section">
+  <h2>Local Case Studies</h2>
+
+  <!-- 2008 Columbus Flood -->
+  <div class="case-study">
+    <button class="case-btn" aria-expanded="false" data-target="caseColumbus2008">
+      2008 Columbus Flood Event
+    </button>
+    <div id="caseColumbus2008" class="case-content">
+      <p>
+        On June 7, 2008, between <strong>5 and 11 inches of rain</strong> fell across southern Indiana in less than 24 hours.
+        The East Fork White River overtopped its levees, inundating large portions of <strong>Columbus, Indiana</strong>.
+        Nearly <strong>3,000 homes were damaged</strong>, and almost <strong>1,000 residents evacuated</strong> as floodwaters spread far beyond mapped floodplains.
+      </p>
+
+      <p>
+        The flood marked one of the most damaging weather events in Bartholomew County history. <strong>Columbus Regional Hospital</strong>—the city’s
+        primary healthcare center—was forced to evacuate 157 patients after 13 feet of water filled its basement, shutting the facility down for four months.
+        The <strong>Cummins Technical Center</strong> also sustained major losses, halting engine testing for weeks and forcing operations to relocate.
+      </p>
+
+      <p>
+        Entire residential blocks, such as those on <strong>Pleasant Grove in downtown Columbus</strong>, were permanently cleared after the flood.
+        The area has since been redeveloped into open greenspace, including a <strong>butterfly habitat and flood-compatible parkland</strong>—a deliberate shift
+        toward resilient land use in vulnerable lowlands.
+      </p>
+
+      <p>
+        In the decade that followed, the city implemented major structural and policy changes:
+        <ul>
+          <li>Construction of <strong>flood walls and hydraulic gates</strong> around key facilities like Columbus Regional Hospital.</li>
+          <li>Installation of <strong>early-warning river gauges and mobile alert systems</strong> to improve emergency response.</li>
+          <li>Expanded FEMA <strong>buyout and green infrastructure programs</strong> to reduce exposure in high-risk neighborhoods.</li>
+        </ul>
+      </p>
+
+      <p>
+        <strong>Key takeaway:</strong> The 2008 flood permanently reshaped Columbus’s land-use strategy—transforming
+        developed floodplain zones into ecological buffers and emergency management corridors. The city now designs
+        around flood recurrence, not just recovery.
+      </p>
+
+      <img src="images/columbus_flood_2008.jpg" alt="2008 Columbus Flood aftermath near Pleasant Grove" class="case-img">
+    </div>
+  </div>
+
+  <!-- 2015 Brown County Flash Flood -->
+  <div class="case-study">
+    <button class="case-btn" aria-expanded="false" data-target="caseBrown2015">
+      2015 Brown County Flash Flood
+    </button>
+    <div id="caseBrown2015" class="case-content">
+      <p>
+        In mid-July 2015, a series of intense thunderstorms swept through <strong>Brown County</strong>, dropping several inches of rain in a matter of hours.
+        <strong>Flash flooding struck steep, shallow-soil terrain</strong> near Bean Blossom and Salt Creek, where upland runoff funneled rapidly into narrow valleys.
+      </p>
+
+      <p>
+        Residents recalled the speed and force of the event—water rose to window height within minutes. 
+        Streams such as <strong>Gnaw Bone Creek</strong> overflowed after debris blockages redirected flows toward nearby homes.
+        Dozens of properties were flooded, including homes restored after the 2008 event. One fatality occurred as floodwaters
+        swept across low-lying rural roads.
+      </p>
+
+      <p>
+        The flood disrupted <strong>electrical service for over 2,000 residents</strong>, caused widespread road closures, and left
+        businesses along State Road 46 coated in mud. Relief efforts were coordinated by the Brown County YMCA and
+        Emergency Management, which distributed supplies and organized temporary shelter.
+      </p>
+
+      <p>
+        <strong>Hydrologic lessons</strong> from this event underscored the risks of <strong>upland flash floods</strong>—occurring outside mapped FEMA flood zones where
+        steep topography and poor soil infiltration magnify storm impacts. The county has since incorporated <strong>LiDAR-based watershed mapping</strong>
+        and <strong>stream debris maintenance programs</strong> to identify and mitigate similar vulnerabilities.
+      </p>
+
+      <p>
+        <strong>Key takeaway:</strong> The 2015 Brown County flood highlighted the intersection of climate, terrain, and infrastructure—showing how 
+        short-duration, high-intensity storms can devastate small communities even beyond traditional floodplains.
+      </p>
+
+      <img src="images/browncounty_flood_2015.webp" alt="Flood damage near Salt Creek, Brown County 2015" class="case-img">
+    </div>
+  </div>
+</section>
+
+<style>
+/* Expand section width and make it breathe */
+.interactive-section {
+  max-width: 1400px; /* wider layout */
+  width: 90%;        /* keeps it responsive on smaller screens */
+  margin: 3rem auto;
+  font-family: 'Roboto', sans-serif;
+  text-align: left;
+}
+
+/* Heading styling */
+.interactive-section h2 {
+  text-align: left; /* or center if you prefer */
+  margin-left: 1rem;
+  font-size: 2rem;
+  color: #22302a;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+/* Case studies box */
+.case-study {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+  margin-bottom: 2rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Button appearance */
+.case-btn {
+  background: #6b8e23;
+  color: #fff;
+  width: 100%;
+  text-align: left;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 1rem 1rem 0 0;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.case-btn:hover {
+  background: #55751b;
+}
+
+.case-btn[aria-expanded="true"] {
+  background: #3e5713;
+}
+
+/* Expanded content area */
+.case-content {
+  display: none;
+  padding: 1.75rem 2rem 2rem;
+  background: #f9fafb;
+  border-top: 2px solid rgba(107,142,35,0.25);
+  animation: fadeIn 0.3s ease;
+}
+
+.case-content p {
+  margin-bottom: 1rem;
+  color: #2b3645;
+  line-height: 1.7;
+  max-width: 1200px; /* keeps paragraphs readable */
+}
+
+.case-img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-top: 1.25rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+</style>
+
+<script>
+document.querySelectorAll('.case-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    const target = document.getElementById(button.getAttribute('data-target'));
+    const expanded = button.getAttribute('aria-expanded') === 'true';
+
+    document.querySelectorAll('.case-content').forEach(c => c.style.display = 'none');
+    document.querySelectorAll('.case-btn').forEach(b => b.setAttribute('aria-expanded', 'false'));
+
+    if (!expanded) {
+      target.style.display = 'block';
+      button.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+</script>
+
+  <!-- IMPLICATIONS -->
+<section class="section implications fade-in story-section">
+  <h2>What the Data Reveal</h2>
+  <div class="impact-columns">
+
+    <div class="impact-box">
+      <h4>Compound Exposure Across Boundaries</h4>
+      <p>
+        Data across the <strong>Camp Atterbury landscape</strong> reveal that extreme precipitation, flooding, and severe wind events 
+        are intensifying in both frequency and magnitude. Floodplain expansion along the <strong>East Fork White River</strong> and 
+        surrounding tributaries now overlaps with areas of rapid residential and commercial growth in <strong>Johnson</strong> and 
+        <strong>Brown Counties</strong>. As storm intensity increases, the combination of higher runoff and concentrated 
+        development is reshaping Atterbury’s exposure profile and straining shared drainage systems.
+      </p>
+    </div>
+
+    <div class="impact-box">
+      <h4>Encroachment and Impervious Growth</h4>
+      <p>
+        Mapping floodplains alongside <strong>building footprints</strong> and <strong>impervious surface change</strong> highlights where 
+        encroachment into natural drainage corridors is amplifying flood and stormwater risks. Development north and east of the 
+        installation—particularly near <strong>Franklin</strong> and <strong>Columbus</strong>—has accelerated runoff toward Atterbury’s 
+        low-lying perimeter, reducing infiltration and increasing pressure on infrastructure and training areas. 
+        Similar trends are observed in <strong>Camp Ripley</strong>, where conversion of forest and wetland cover has altered local 
+        hydrology and sedimentation patterns, underscoring the regional scale of this challenge.
+      </p>
+    </div>
+
+    <div class="impact-box">
+      <h4>Resilience and Adaptive Capacity</h4>
+      <p>
+        Integrating <strong>climate projection datasets</strong> into the analysis indicates that storm frequency and rainfall intensity 
+        are likely to rise through mid-century, expanding both community and mission risks. For Camp Atterbury, adaptation will depend 
+        on strengthening <strong>natural buffers</strong>, retrofitting stormwater infrastructure, and prioritizing 
+        <strong>flood-compatible land use</strong> within surrounding jurisdictions. Together with Camp Ripley’s ongoing resilience 
+        planning, these findings demonstrate how coordinated, landscape-scale strategies can sustain readiness while reducing 
+        vulnerability to extreme weather.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.implications {
+  max-width: 1000px;
+  margin: 4rem auto;
+  text-align: left;
+  color: #2b3645;
+}
+
+.implications h2 {
+  text-align: center;
+  color: #22302a;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.impact-columns {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.impact-box {
+  background: #f9fafb;
+  border-left: 4px solid #6b8e23;
+  border-radius: 0.75rem;
+  padding: 1.75rem 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.impact-box:hover {
+  transform: translateY(-3px);
+}
+
+.impact-box h4 {
+  color: #22302a;
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.impact-box p {
+  line-height: 1.7;
+  color: #2b3645;
+  margin: 0;
+}
+</style>
+
+<!-- TORNADO CASE STUDY MODAL -->
+<div class="case-modal" id="case-tornado2008-modal">
+  <div class="case-modal-overlay"></div>
+
+  <div class="case-modal-content">
+    <div class="case-modal-close">&times;</div>
+
+    <h2>Case Study: Tornado Impacts at Camp Atterbury (June 2008)</h2>
+    <div class="case-modal-title-bar"></div>
+
+    <p><strong>Event:</strong> Two tornadoes struck Camp Atterbury within minutes of each other during a severe storm system in June 2008.</p>
+<br>
+    <p><strong>Impacts:</strong> The tornadoes caused extensive damage to administrative buildings, vehicles, power lines, and other installation infrastructure. 
+      More than <strong>50 buildings were damaged</strong>, and critical services—including <strong>electricity and gas</strong>—were temporarily disrupted.</p>
+ <br>
+    <p><strong>Operational Response:</strong> No injuries occurred among the more than <strong>3,500 personnel</strong> on the installation due to advance weather monitoring,
+      routine tornado drills, and rapid implementation of safety protocols. Training operations resumed within hours.</p>
+    <br>
+    <p><strong>Why it matters:</strong></p>
+    <ul>
+      <li>Demonstrates direct exposure of military installations to severe convective storms and tornado hazards.</li>
+      <li>Highlights operational vulnerability of administrative and support infrastructure.</li>
+      <li>Underscores the importance of preparedness, redundancy, and rapid recovery capacity.</li>
+    </ul>
+        <!-- IMAGE -->
+    <img src="images/campatterbury_storm2008.webp" class="case-modal-img" alt="Tornado damage to buildings and vehicles at Camp Atterbury in June 2008">
+
+    <p class="case-modal-caption">
+      Tornado damage to administrative and support infrastructure at Camp Atterbury following the June 2008 storm.
+    </p>
+
+    <p class="case-modal-caption">
+      Source: U.S. Army News Service, “Camp Atterbury Resumes Training After Two Tornadoes,” June 6, 2008
+    </p>
+  </div>
+</div>
+
+  <!-- NAVIGATION -->
+  <div class="page-nav-buttons">
+    <a href="priorityspecies.html" class="nav-btn">← Prev: Priority Species</a>
+    <a href="index.html" class="nav-btn">Next: Home →</a>
+  </div>
+
+  <script src="extremeweather.js"></script>
+</body>
+</html>
