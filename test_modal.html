@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.case-modal { display: none; position: fixed; z-index: 9999; }
+.case-modal.visible { display: block; }
+</style>
+</head>
+<body>
+<button class="timeline-case-btn" data-case="case-csweet-modal">Test Button</button>
+<div class="case-modal" id="case-csweet-modal">
+  <div>MODAL CONTENT</div>
+</div>
+<script>
+console.log("Script loaded");
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM ready");
+  const btns = document.querySelectorAll(".timeline-case-btn");
+  console.log("Found buttons:", btns.length);
+  btns.forEach(btn => {
+    console.log("Setting up button:", btn.getAttribute("data-case"));
+    btn.addEventListener("click", () => {
+      console.log("Button clicked!");
+      const modalID = btn.getAttribute("data-case");
+      console.log("Modal ID:", modalID);
+      const modal = document.getElementById(modalID);
+      console.log("Modal found:", modal);
+      if (modal) {
+        modal.classList.add("visible");
+        console.log("Modal should be visible now");
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
