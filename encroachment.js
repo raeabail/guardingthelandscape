@@ -112,11 +112,11 @@ if (mapDisplay && steps.length) {
   let currentStep = null;
 
   const MAP_CAPTIONS = {
-    "1940s": "By 1960, aerial imagery and land-cover data depict a landscape dominated by agriculture...",
-    "1970s": "The 1980–today land-use comparison shows how early lake developments evolved...",
-    "2000s": "Encroachment patterns emerge as subdivisions expand during the 2000s–2010s...",
-    "2010s": "Floodplain overlays illustrate areas where new districts extend into flood-fringe zones...",
-    "2050": "Farms Under Threat 2040 scenarios show how sprawl could intensify without intervention."
+    "1940s": "By 1960, aerial imagery (left) and land cover (right) data depict a landscape dominated by agriculture on the north, east, and south sides of Camp Atterbury (black outline), contrasted by intact forest and natural buffers to the west.",
+    "1970s": "The 1980-today land use comparison shows how early lake developments evolved into dense residential clusters, fragmenting what had been an uninterrupted forest landscape.",
+    "2000s": "Encroachment patterns emerge as new subdivisions and commercial zones expand toward Camp Atterbury, converting farmland and reducing habitat connectivity during the 2000s–2010s.",
+    "2010s": "Floodplain overlays illustrate where recent zoning proposals and parcel-level development intersect flood-fringe areas, highlighting locations where land conversion may increase long-term flood exposure and management complexity.",
+    "2050": "Side-by-side Farms Under Threat 2040 scenarios show how business-as-usual growth patterns could intensify sprawl across Indiana while strategic zoning and conservation investments dramatically slow farmland loss."
   };
 
   const captionEl = document.getElementById("mapCaption");
@@ -174,7 +174,18 @@ if (mapDisplay && steps.length) {
       }
     });
 
-    if (!candidate) candidate = steps[0];
+    // If no step is in view, keep the last step active (don't reset to first)
+    if (!candidate && currentStep) {
+      // Check if we've scrolled past all steps
+      const lastStepRect = steps[steps.length - 1].getBoundingClientRect();
+      if (lastStepRect.bottom < 0) {
+        candidate = steps[steps.length - 1];
+      } else {
+        candidate = steps[0];
+      }
+    } else if (!candidate) {
+      candidate = steps[0];
+    }
 
     if (candidate !== currentStep) {
       currentStep = candidate;
@@ -207,24 +218,24 @@ document.querySelectorAll(".timeline-case-btn").forEach(btn => {
     const nextBtn = modal.querySelector(".case-next");
     const counter = modal.querySelector(".case-counter");
 
-    let index = 0;
+    // Only set up slide navigation if this modal has slides
+    if (slides.length > 0 && prevBtn && nextBtn) {
+      let index = 0;
 
-    function showSlide(i) {
-      slides.forEach(s => s.classList.remove("visible"));
-      slides[i].classList.add("visible");
+      function showSlide(i) {
+        slides.forEach(s => s.classList.remove("visible"));
+        slides[i].classList.add("visible");
 
-      if (counter) counter.textContent = `${i + 1} / ${slides.length}`;
-      if (prevBtn) prevBtn.disabled = i === 0;
-      if (nextBtn) nextBtn.disabled = i === slides.length - 1;
-    }
+        if (counter) counter.textContent = `${i + 1} / ${slides.length}`;
+        prevBtn.disabled = i === 0;
+        nextBtn.disabled = i === slides.length - 1;
+      }
 
-    showSlide(index);
+      showSlide(index);
 
-    if (prevBtn)
       prevBtn.onclick = () => { if (index > 0) showSlide(--index); };
-
-    if (nextBtn)
       nextBtn.onclick = () => { if (index < slides.length - 1) showSlide(++index); };
+    }
   });
 });
 
@@ -278,39 +289,50 @@ window.addEventListener("resize", updateStickyScrollHeight);
 --------------------------------------------------------- */
 
 const evaModal = document.getElementById("evaModal");
-const evaDefault = evaModal.querySelector(".eva-default");
-const evaBody = evaModal.querySelector(".eva-body");
+console.log("EVA Modal element:", evaModal);
 
-// OPEN: Interactive Map
-document.querySelectorAll(".eva-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const link = btn.dataset.eva;
+if (evaModal) {
+  console.log("EVA Modal found! Setting up event listeners...");
+  const evaDefault = evaModal.querySelector(".eva-default");
+  const evaBody = evaModal.querySelector(".eva-body");
+  const evaContent = evaModal.querySelector(".eva-content");
 
-    evaDefault.style.display = "block";
-    evaBody.style.display = "none";
-    evaBody.innerHTML = "";
+  // OPEN: Interactive Map
+  const evaButtons = document.querySelectorAll(".eva-btn");
+  console.log("Found eva-btn buttons:", evaButtons.length);
+  
+  evaButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      console.log("EVA Interactive Map button clicked!");
+      const link = btn.dataset.eva;
+      console.log("Link:", link);
 
-    evaModal.classList.add("visible");
-    document.body.style.overflow = "hidden";
+      evaDefault.style.display = "block";
+      evaBody.style.display = "none";
+      evaBody.innerHTML = "";
+      if (evaContent) evaContent.classList.remove("showing-summary");
 
-    document.getElementById("evaLaunch").onclick = () => {
-      const w = 1400, h = 900;
-      const left = (screen.width - w) / 2;
-      const top = (screen.height - h) / 2;
+      evaModal.classList.add("visible");
+      document.body.style.overflow = "hidden";
 
-      window.open(
-        link, "_blank",
-        `toolbar=no,location=no,status=no,menubar=no,
-         scrollbars=yes,resizable=yes,width=${w},height=${h},
-         top=${top},left=${left}`
-      );
-    };
+      const launchBtn = document.getElementById("evaLaunch");
+      if (launchBtn && link) {
+        // Store the link on the button itself
+        launchBtn.dataset.mapUrl = link;
+        launchBtn.onclick = () => {
+          const url = launchBtn.dataset.mapUrl;
+          console.log("Launch Map clicked! Opening:", url);
+          if (url) {
+            window.open(url, "_blank");
+          }
+        };
+      }
+    });
   });
-});
 
 
-// OPEN: Summary Results
-document.querySelectorAll("[data-eva-summary]").forEach(btn => {
+  // OPEN: Summary Results
+  document.querySelectorAll("[data-eva-summary]").forEach(btn => {
   btn.addEventListener("click", () => {
     const county = btn.getAttribute("data-eva-summary");
 
@@ -319,6 +341,7 @@ const EVA_TEXT = { brown: `<h3>Brown County – Low–Moderate Development Press
     evaDefault.style.display = "none";
     evaBody.style.display = "block";
     evaBody.innerHTML = EVA_TEXT[county];
+    if (evaContent) evaContent.classList.add("showing-summary");
 
     evaModal.classList.add("visible");
     document.body.style.overflow = "hidden";
@@ -326,25 +349,24 @@ const EVA_TEXT = { brown: `<h3>Brown County – Low–Moderate Development Press
 });
 
 
-// CLOSE MODAL (single clean implementation)
-function closeEVA() {
-  evaModal.classList.remove("visible");
-  document.body.style.overflow = "";
+  // CLOSE MODAL (single clean implementation)
+  function closeEVA() {
+    evaModal.classList.remove("visible");
+    document.body.style.overflow = "";
 
-  evaDefault.style.display = "block";
-  evaBody.style.display = "none";
-  evaBody.innerHTML = "";
+    evaDefault.style.display = "block";
+    evaBody.style.display = "none";
+    evaBody.innerHTML = "";
+    if (evaContent) evaContent.classList.remove("showing-summary");
+  }
+
+  const closeBtn = evaModal.querySelector(".eva-close");
+  const overlay = evaModal.querySelector(".eva-overlay");
+  
+  if (closeBtn) closeBtn.onclick = closeEVA;
+  if (overlay) overlay.onclick = closeEVA;
+  document.addEventListener("keydown", e => e.key === "Escape" && closeEVA());
 }
-
-evaModal.querySelector(".eva-close").onclick = closeEVA;
-evaModal.querySelector(".eva-overlay").onclick = closeEVA;
-document.addEventListener("keydown", e => e.key === "Escape" && closeEVA());
-
-
-
-/* ---------------------------------------------------------
-   12. SORTABLE HOTSPOT TABLE
---------------------------------------------------------- */
 document.querySelectorAll("#hotspotTable th").forEach(header => {
   header.addEventListener("click", () => {
     const table = header.closest("table");
