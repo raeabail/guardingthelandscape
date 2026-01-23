@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+console.log("Script loaded!");
 
 /* ---------------------------------------------------------
    1. FADE-IN REVEAL ANIMATIONS
@@ -38,6 +39,9 @@ accHeaders.forEach(header => {
 --------------------------------------------------------- */
 const mapDisplay = document.getElementById("mapDisplay");
 const steps = Array.from(document.querySelectorAll(".timeline-step"));
+
+console.log("mapDisplay:", mapDisplay);
+console.log("steps found:", steps.length);
 
 if (mapDisplay) {
   mapDisplay.style.position = "relative";
@@ -110,17 +114,37 @@ if (parallaxElements.length) {
     const FADE_DURATION = 350;
     let currentStep = null;
 
+    // ⬇️ Set your map URLs for each timeline step - MUST BE BEFORE loadMapForStep
+    // Note: Timeline steps can have a single source (string) or multiple sources (array)
+    const MAPS = {
+      "pre1980": "https://experience.arcgis.com/experience/8701cea8c4f247aea6f6cee9028f5ed7",
+      "2000s": "https://experience.arcgis.com/experience/68ae64bb6e64477a8edb854727c337bd",
+      "2010s": [
+        "images/EastFWR_flooding.png",
+        "images/flatrock_flooding.png"
+      ],
+      "2020s": "https://experience.arcgis.com/experience/608a664f91b94ac1b4d43ed3e48238a7",
+      "2050": "https://livingatlas.arcgis.com/assessment-tool/search"
+    };
+
     // ⬇️ Set your captions for each timeline step
     const MAP_CAPTIONS = {
-      "pre1980": "Historic flood observation points documented by the U.S. Geological Survey during the 1959 Indiana floods, illustrating flood impacts concentrated along established river corridors.",
+      "pre1980": "Historic flood observation points (numbered above) documented by the U.S. Geological Survey during the 1959 Indiana floods, illustrating flood impacts concentrated along established river corridors.",
       "2000s": "As development expanded around Camp Atterbury from the 1980s through the 2010s, areas of increased development increasingly coincided with higher downstream streamflow, as reflected in average monthly discharge.",
-      "1967": "Late 1990s surveys at Camp Atterbury identified multiple Indiana bat maternity colonies. Figure shows mapped primary and alternate roost trees documented through 1997–2002 mist-netting and radio-telemetry studies, revealing core summer habitat along Nineveh Creek, the Driftwood River, and wooded corridors near the multi-impact training range.",
-      "2020s": "Areas surrounding Camp Atterbury’s perimeter where floodplains, storm pathways, impervious surfaces, and access routes intersect, illustrating real-time operational exposure to multiple extreme weather hazards.",
-      "2050": "Projected changes in habitat suitability for the Indiana bat under multiple scenarios through mid-century. Red areas indicate regions where suitable habitat is expected to contract, expand, or shift over time as environmental conditions change."
+      "2010s": [
+        "East Fork White River floodplain expansion in Bartholomew County, showing FEMA-mapped flood zones extending adjacent to Camp Atterbury's southern perimeter where development and flood-prone areas increasingly overlap.",
+        "Flat Rock Creek floodplain mapping near Camp Atterbury's eastern boundary, illustrating how tributary flooding and localized stormwater drainage affect training access roads and buffer zone infrastructure."
+      ],
+      "2020s": "Areas surrounding Camp Atterbury's perimeter where floodplains, storm pathways, impervious surfaces, and access routes intersect, illustrating real-time operational exposure to multiple extreme weather hazards.",
+      "2050": "Use NOAA's Mapping For Resilience and Adaptation Tool above to explore future projections for extreme weather hazards. Type in <b>Johnson County, Bartholomew County, or Brown County</b> to see forecasts for flooding, wildfire, extreme heat, and drought impacts. Choose between two emission scenarios (<b>Lower Emissions</b> or <b>Higher Emissions</b>) and time periods: <b>early century (2015-2044), mid century (2035-2064), or late century (2070-2099)</b>. A user guide is available: https://resilience.climate.gov/pages/user-guide"
     };
 
     const captionEl = document.getElementById("mapCaption");
     mapDisplay.style.transition = `opacity ${FADE_DURATION}ms ease-in-out`;
+
+    // Track current slide index for multi-source steps
+    let currentSlideIndex = 0;
+    let currentStepSources = null;
 
     function activateStep(step) {
       steps.forEach(s => s.classList.remove("active"));
@@ -135,56 +159,142 @@ if (parallaxElements.length) {
       }, FADE_DURATION);
     }
 
-    function loadMapForStep(stepEl) {
+    function loadMapForStep(stepEl, slideIndex = 0) {
   if (!stepEl) return;
 
   const step = stepEl.dataset.step;
-  const src = MAPS[step]; // <-- Must read from MAPS BEFORE using it
+  const mapData = MAPS[step];
+  
+  if (!mapData) {
+    console.warn(`No map data found for step: ${step}`);
+    return;
+  }
+  
+  // Determine if this step has multiple sources
+  const isMultiSource = Array.isArray(mapData);
+  const sources = isMultiSource ? mapData : [mapData];
+  const captions = Array.isArray(MAP_CAPTIONS[step]) ? MAP_CAPTIONS[step] : [MAP_CAPTIONS[step]];
+  
+  currentStepSources = sources;
+  currentSlideIndex = Math.min(slideIndex, sources.length - 1);
+  
+  const src = sources[currentSlideIndex];
+  
+  if (!src) {
+    console.warn(`No source found for step: ${step}, index: ${currentSlideIndex}`);
+    return;
+  }
+  
+  const caption = captions[currentSlideIndex] || captions[0] || "";
 
   if (captionEl) captionEl.classList.remove("visible");
 
-  // If it's an image (PNG/JPG/etc), load it as an <img>
-  if (src.match(/\.(png|jpg|jpeg|webp)$/i)) {
+  // Build navigation arrows HTML if multiple sources
+  const navHTML = isMultiSource ? `
+    <div class="map-nav-arrows">
+      <button class="map-nav-btn map-nav-prev" ${currentSlideIndex === 0 ? 'disabled' : ''}>
+        <span>‹</span>
+      </button>
+      <span class="map-nav-counter">${currentSlideIndex + 1} / ${sources.length}</span>
+      <button class="map-nav-btn map-nav-next" ${currentSlideIndex === sources.length - 1 ? 'disabled' : ''}>
+        <span>›</span>
+      </button>
+    </div>
+  ` : '';
+
+  // Fullscreen button HTML
+  const fullscreenHTML = `
+    <button class="map-fullscreen-btn" aria-label="Toggle fullscreen" title="Toggle fullscreen">
+      <span class="fullscreen-icon">⛶</span>
+    </button>
+  `;
+
+  // Check if it's an image
+  if (src && src.match(/\.(png|jpg|jpeg|webp)$/i)) {
     fadeSwapMap(`
       <img src="${src}" 
            class="static-map-image" 
            style="width:100%; height:auto; display:block;"/>
+      ${navHTML}
+      ${fullscreenHTML}
     `);
-
-    // show caption after fade-in
-    if (captionEl) {
-      setTimeout(() => {
-        captionEl.textContent = MAP_CAPTIONS[step] || "";
-        captionEl.classList.add("visible");
-      }, FADE_DURATION);
-    }
-
-    return; // IMPORTANT: stop execution here
+  } 
+  // Check if it's a PDF
+  else if (src && src.match(/\.pdf$/i)) {
+    fadeSwapMap(`
+      <iframe src="${src}" 
+              style="width:100%; height:100%; border:none;" 
+              type="application/pdf"></iframe>
+      ${navHTML}
+      ${fullscreenHTML}
+    `);
+  }
+  // Otherwise load it as an iframe (for ArcGIS experiences)
+  else {
+    fadeSwapMap(`
+      <iframe src="${src}"></iframe>
+      ${navHTML}
+      ${fullscreenHTML}
+    `);
   }
 
-  // Otherwise load it as an iframe
-  fadeSwapMap(`<iframe src="${src}"></iframe>`);
+  // Attach event listeners to navigation buttons
+  if (isMultiSource) {
+    setTimeout(() => {
+      const prevBtn = mapDisplay.querySelector('.map-nav-prev');
+      const nextBtn = mapDisplay.querySelector('.map-nav-next');
+      
+      if (prevBtn) {
+        prevBtn.onclick = () => {
+          if (currentSlideIndex > 0) {
+            loadMapForStep(stepEl, currentSlideIndex - 1);
+          }
+        };
+      }
+      
+      if (nextBtn) {
+        nextBtn.onclick = () => {
+          if (currentSlideIndex < sources.length - 1) {
+            loadMapForStep(stepEl, currentSlideIndex + 1);
+          }
+        };
+      }
+    }, FADE_DURATION);
+  }
 
-  // Caption
+  // Attach fullscreen button event listener
+  setTimeout(() => {
+    const fullscreenBtn = mapDisplay.querySelector('.map-fullscreen-btn');
+    if (fullscreenBtn) {
+      fullscreenBtn.onclick = () => {
+        // Target the actual content (iframe or img) for fullscreen
+        const content = mapDisplay.querySelector('iframe, img');
+        if (content) {
+          if (!document.fullscreenElement) {
+            content.requestFullscreen().catch(err => {
+              console.error('Fullscreen request failed:', err);
+            });
+          } else {
+            document.exitFullscreen();
+          }
+        }
+      };
+    }
+  }, FADE_DURATION);
+
+  // Show caption after fade-in
   if (captionEl) {
     setTimeout(() => {
-      captionEl.textContent = MAP_CAPTIONS[step] || "";
+      captionEl.innerHTML = caption;
       captionEl.classList.add("visible");
     }, FADE_DURATION);
   }
 }
 
-    // ⬇️ Set your map URLs for each timeline step
-    const MAPS = {
-      "pre1980": "https://experience.arcgis.com/experience/8701cea8c4f247aea6f6cee9028f5ed7",
-      "2000s": "https://experience.arcgis.com/experience/68ae64bb6e64477a8edb854727c337bd",
-      "1967": "https://experience.arcgis.com/experience/28a01ecb94b94e93ad0bb80da2c37f90",
-      "2020s": "https://experience.arcgis.com/experience/608a664f91b94ac1b4d43ed3e48238a7",
-      "2050": "images/indianabat_futurescenarios.jpg"
-    };
-
   function pickActiveStep() {
     const stickyMap = document.querySelector(".sticky-map");
+    console.log("pickActiveStep called, stickyMap:", stickyMap);
+    
     const triggerY = stickyMap.getBoundingClientRect().height * 0.50;
 
     let candidate = null;
@@ -199,9 +309,11 @@ if (parallaxElements.length) {
     });
 
     if (!candidate) candidate = steps[0];
+    console.log("Selected candidate:", candidate ? candidate.dataset.step : "none");
 
     if (candidate !== currentStep) {
       currentStep = candidate;
+      currentSlideIndex = 0; // Reset to first slide when changing steps
       activateStep(candidate);
       loadMapForStep(candidate);
     }
@@ -209,6 +321,7 @@ if (parallaxElements.length) {
 
   window.addEventListener("scroll", pickActiveStep, { passive: true });
   window.addEventListener("resize", pickActiveStep);
+  console.log("About to call pickActiveStep initially");
   pickActiveStep();
 }
 
