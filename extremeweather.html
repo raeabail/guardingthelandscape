@@ -22,6 +22,8 @@
     </nav>
   </header>
 
+<main>
+
   <!-- INTRO -->
   <section class="intro-section fade-in">
     <h1 class="page-title">Extreme Weather</h1>
@@ -46,8 +48,7 @@
 
   <!-- TIMELINE -->
   <section class="section section-alt">
-    <!-- Timeline (sticky map + right-side steps like Priority Species) -->
-    <section id="timeline" class="section timeline-wrap fade-in">
+    <section id="timeline" class="timeline-wrap">
       <div class="timeline">
         <div class="sticky-map">
           <!-- mapDisplay is used by timeline JS to host images/videos/maps -->
@@ -85,7 +86,7 @@
             </button>
         </div>
 
-        <div class="timeline-step" data-map="images/flood-expansion.jpg">
+        <div class="timeline-step" data-step="2010s">
           <h3>2010s–2020s: From Occasional Flooding to Recurring Disruption</h3>
           <ul>
             <li>Mapped FEMA floodplain boundaries expanded along the East Fork White River, extending closer to, and in some areas directly adjacent to, Camp Atterbury’s perimeter, reflecting increased flood exposure under contemporary hydrologic conditions.</li>
@@ -104,7 +105,7 @@
           </ul>
         </div>
 
-        <div class="timeline-step" data-map="images/projected-future.jpg">
+        <div class="timeline-step" data-step="2050">
           <h3>2050 & Beyond: Intensifying Extreme Weather Risk</h3>
           <ul>
             <li>Projections for southern Indiana consistently indicate wetter conditions by mid-century, with annual precipitation increases on the order of approximately 15-25% and a disproportionate rise in heavy precipitation events that intensify runoff generation and stormwater loading across the region.</li>
@@ -115,11 +116,13 @@
         </div>
       </div>
     </div>
+    </section>
   </section>
-</section>
 
-<section id="flood-overlay" class="interactive-section fade-in story-section">
-  <h2>Floodplain Development</h2>
+  <!-- FLOODPLAIN DEVELOPMENT -->
+  <section class="section">
+    <div class="container">
+      <h2 class="accent-heading">Floodplain Development</h2>
   <p class="lead">
     Mapping <strong>500-year flood zones</strong> and <strong>floodways</strong> alongside 
     <strong>building footprints</strong> reveals how development has expanded into flood-prone areas 
@@ -131,7 +134,7 @@
   <div class="map-container">
     <!-- County Toggle Buttons -->
     <div class="map-layer-buttons county-buttons">
-      <button onclick="showCountyMap('johnson')">Johnson County</button>
+      <button class="active" onclick="showCountyMap('johnson')">Johnson County</button>
       <button onclick="showCountyMap('brown')">Brown County</button>
       <button onclick="showCountyMap('bartholomew')">Bartholomew County</button>
     </div>
@@ -165,69 +168,6 @@
   </div>
 </section>
 
-<style>
-.map-container {
-  width: 95%;
-  max-width: 1400px;
-  margin: 2rem auto;
-  text-align: center;
-}
-.map-layer-buttons.county-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
-}
-.map-layer-buttons.county-buttons button {
-  background-color: #6b8e23;
-  color: #fff;
-  border: none;
-  border-radius: 0.4rem;
-  padding: 0.6rem 1.5rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.15s ease;
-}
-.map-layer-buttons.county-buttons button:hover,
-.map-layer-buttons.county-buttons button.active {
-  background-color: #55731a;
-  transform: translateY(-1px);
-}
-.county-map {
-  display: none;
-  width: 100%;
-  opacity: 0;
-  transition: opacity 0.6s ease-in-out;
-}
-.county-map.active {
-  display: block;
-  opacity: 1;
-}
-.county-image {
-  width: 100%;
-  max-width: 1200px;
-  border-radius: 0.75rem;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-}
-.dashboard-description {
-  max-width: 1100px;
-  margin: 2rem auto 3rem;
-  background: #f9fafb;
-  border-left: 4px solid #6b8e23;
-  border-radius: 0.75rem;
-  padding: 1.75rem 2rem;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-}
-.dashboard-description ul {
-  margin: 1rem 0 1.25rem 1.5rem;
-  line-height: 1.65;
-  color: #2b3645;
-}
-.dashboard-description li strong {
-  color: #22302a;
-}
-</style>
-
 <script>
 function showCountyMap(countyId) {
   // Hide all maps
@@ -250,59 +190,6 @@ function showCountyMap(countyId) {
 </script>
 </section>
 
-<style>
-.map-container {
-  width: 95%;
-  max-width: 1400px;
-  margin: 2rem auto;
-  text-align: center;
-}
-.map-layer-buttons.county-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
-}
-.map-layer-buttons.county-buttons button {
-  background-color: #6b8e23;
-  color: white;
-  border: none;
-  border-radius: 0.4rem;
-  padding: 0.6rem 1.5rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-.map-layer-buttons.county-buttons button:hover,
-.map-layer-buttons.county-buttons button.active {
-  background-color: #55731a;
-}
-.county-map {
-  display: none;
-  width: 100%;
-}
-.county-map.active {
-  display: block;
-}
-.dashboard-description {
-  max-width: 1100px;
-  margin: 2rem auto 3rem;
-  background: #f9fafb;
-  border-left: 4px solid #6b8e23;
-  border-radius: 0.75rem;
-  padding: 1.75rem 2rem;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-}
-.dashboard-description ul {
-  margin: 1rem 0 1.25rem 1.5rem;
-  line-height: 1.65;
-  color: #2b3645;
-}
-.dashboard-description li strong {
-  color: #22302a;
-}
-</style>
-
 <script>
 function showCountyMap(countyId) {
   // Hide all maps
@@ -315,10 +202,13 @@ function showCountyMap(countyId) {
   event.target.classList.add('active');
 }
 </script>
+    </div>
+  </section>
 
-
-<section id="wind-overlay" class="interactive-section fade-in story-section">
-  <h2>Severe Wind and Storm Paths</h2>
+  <!-- SEVERE WIND -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="accent-heading">Severe Wind and Storm Paths</h2>
 
   <p class="lead">
     The <strong>Indiana Department of Homeland Security (IDHS)</strong> developed this dashboard using verified data from the 
@@ -363,51 +253,13 @@ function showCountyMap(countyId) {
     </p>
   </div>
 </section>
-
-<style>
-.dashboard-container {
-  width: 95%;
-  max-width: 1400px;
-  margin: 2rem auto;
-}
-
-.dashboard-description {
-  max-width: 1100px;
-  margin: 2rem auto 3rem;
-  background: #f9fafb;
-  border-left: 4px solid #6b8e23;
-  border-radius: 0.75rem;
-  padding: 1.75rem 2rem;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-}
-
-.dashboard-description h4 {
-  color: #22302a;
-  margin-top: 1.5rem;
-  font-size: 1.15rem;
-  font-weight: 700;
-}
-
-.dashboard-description ul {
-  margin: 1rem 0 1.25rem 1.5rem;
-  line-height: 1.65;
-  color: #2b3645;
-}
-
-.dashboard-description li strong {
-  color: #22302a;
-}
-
-.dashboard-description p {
-  color: #2b3645;
-  line-height: 1.7;
-}
-</style>
+    </div>
+  </section>
 
   <!-- CASE STUDIES -->
-    <!-- CASE STUDIES -->
-<section class="interactive-section fade-in story-section">
-  <h2>Local Case Studies</h2>
+  <section class="section">
+    <div class="container">
+      <h2 class="accent-heading">Local Case Studies</h2>
 
   <!-- 2008 Columbus Flood -->
   <div class="case-study">
@@ -492,90 +344,6 @@ function showCountyMap(countyId) {
   </div>
 </section>
 
-<style>
-/* Expand section width and make it breathe */
-.interactive-section {
-  max-width: 1400px; /* wider layout */
-  width: 90%;        /* keeps it responsive on smaller screens */
-  margin: 3rem auto;
-  font-family: 'Roboto', sans-serif;
-  text-align: left;
-}
-
-/* Heading styling */
-.interactive-section h2 {
-  text-align: left; /* or center if you prefer */
-  margin-left: 1rem;
-  font-size: 2rem;
-  color: #22302a;
-  margin-bottom: 2rem;
-  font-weight: 700;
-}
-
-/* Case studies box */
-.case-study {
-  background: #fff;
-  border-radius: 1rem;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-  margin-bottom: 2rem;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-/* Button appearance */
-.case-btn {
-  background: #6b8e23;
-  color: #fff;
-  width: 100%;
-  text-align: left;
-  padding: 1.2rem 1.5rem;
-  font-size: 1.15rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 1rem 1rem 0 0;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.case-btn:hover {
-  background: #55751b;
-}
-
-.case-btn[aria-expanded="true"] {
-  background: #3e5713;
-}
-
-/* Expanded content area */
-.case-content {
-  display: none;
-  padding: 1.75rem 2rem 2rem;
-  background: #f9fafb;
-  border-top: 2px solid rgba(107,142,35,0.25);
-  animation: fadeIn 0.3s ease;
-}
-
-.case-content p {
-  margin-bottom: 1rem;
-  color: #2b3645;
-  line-height: 1.7;
-  max-width: 1200px; /* keeps paragraphs readable */
-}
-
-.case-img {
-  width: 100%;
-  max-height: 360px;
-  object-fit: cover;
-  border-radius: 0.5rem;
-  margin-top: 1.25rem;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-</style>
-
 <script>
 document.querySelectorAll('.case-btn').forEach(button => {
   button.addEventListener('click', () => {
@@ -592,11 +360,14 @@ document.querySelectorAll('.case-btn').forEach(button => {
   });
 });
 </script>
+    </div>
+  </section>
 
   <!-- IMPLICATIONS -->
-<section class="section implications fade-in story-section">
-  <h2>What the Data Reveal</h2>
-  <div class="impact-columns">
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="accent-heading">What the Data Reveal</h2>
+      <div class="impact-grid">
 
     <div class="impact-box">
       <h4>Compound Exposure Across Boundaries</h4>
@@ -614,7 +385,7 @@ document.querySelectorAll('.case-btn').forEach(button => {
       <p>
         Mapping floodplains alongside <strong>building footprints</strong> and <strong>impervious surface change</strong> highlights where 
         encroachment into natural drainage corridors is amplifying flood and stormwater risks. Development north and east of the 
-        installation—particularly near <strong>Franklin</strong> and <strong>Columbus</strong>—has accelerated runoff toward Atterbury’s 
+        installation, particularly near <strong>Franklin</strong> and <strong>Columbus</strong>, has accelerated runoff toward Atterbury’s 
         low-lying perimeter, reducing infiltration and increasing pressure on infrastructure and training areas. 
         Similar trends are observed in <strong>Camp Ripley</strong>, where conversion of forest and wetland cover has altered local 
         hydrology and sedimentation patterns, underscoring the regional scale of this challenge.
@@ -634,56 +405,10 @@ document.querySelectorAll('.case-btn').forEach(button => {
     </div>
 
   </div>
-</section>
+    </div>
+  </section>
 
-<style>
-.implications {
-  max-width: 1000px;
-  margin: 4rem auto;
-  text-align: left;
-  color: #2b3645;
-}
-
-.implications h2 {
-  text-align: center;
-  color: #22302a;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  font-weight: 700;
-}
-
-.impact-columns {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.impact-box {
-  background: #f9fafb;
-  border-left: 4px solid #6b8e23;
-  border-radius: 0.75rem;
-  padding: 1.75rem 2rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-  transition: transform 0.2s ease;
-}
-
-.impact-box:hover {
-  transform: translateY(-3px);
-}
-
-.impact-box h4 {
-  color: #22302a;
-  font-size: 1.2rem;
-  margin-bottom: 0.75rem;
-  font-weight: 700;
-}
-
-.impact-box p {
-  line-height: 1.7;
-  color: #2b3645;
-  margin: 0;
-}
-</style>
+</main>
 
 <!-- TORNADO CASE STUDY MODAL -->
 <div class="case-modal" id="case-tornado2008-modal">
