@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Background – Camp Atterbury</title>
+  <title>Introduction – Camp Atterbury</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
@@ -15,7 +15,7 @@
       <img src="images/SISL_logo.png" alt="Camp Atterbury Logo" class="site-logo" />
     </a>
     <nav class="main-nav">
-      <a href="background.html" class="active">Background</a>
+      <a href="background.html" class="active">Introduction</a>
       <a href="encroachment.html">Encroachment</a>
       <a href="priorityspecies.html">Priority Species</a>
       <a href="extremeweather.html">Extreme Weather</a>
@@ -26,54 +26,156 @@
   <section class="section" id="backgroundSection">
     <div class="background-flex">
       <div class="background-text-block">
-  <h2 class="background-title">Background</h2>
+        <h2 class="background-title">Introduction</h2>
         <p class="background-text">
-          Camp Atterbury, established in <b>1942</b> on 40,000 acres of farms and small communities in <b>Johnson, Bartholomew, and Brown Counties</b>, has long served as a training hub for the 
-          <b>Indiana National Guard and numerous other military personnel from multiple branches</b>. While the installation preserved large interior blocks of land from private development, 
-          the surrounding counties have steadily transformed. Farmland giving way to suburban sprawl in Johnson County, moderate growth along the I-65 and US Highway 31 corridors in Bartholomew, 
+          Camp Atterbury, established in <b>1942</b> on 40,000 acres of farms and small communities in <b>Johnson, Bartholomew, and Brown Counties</b>, has long served as a training hub for the
+          <b>Indiana National Guard and numerous other military personnel from multiple branches</b>. While the installation preserved large interior blocks of land from private development,
+          the surrounding counties have steadily transformed. Farmland giving way to suburban sprawl in Johnson County, moderate growth along the I-65 and US Highway 31 corridors in Bartholomew,
           and low-density rural development in Brown County. These shifts shape the challenges of today: <b>balancing military readiness, ecological conservation, and community resilience</b> in the face of accelerating land use change and extreme weather.
           <br><br>
-          To explore these challenges more clearly, the following sections trace three themes: <strong>encroachment through incompatible land use, priority species, and extreme weather</strong>, 
-          each with its own timeline connecting the past, present, and future.
-        </p>
+          To explore these challenges, the following sections present in-depth analyses of three interconnected themes: <b>encroachment through incompatible land use, priority species, and extreme weather</b>. These analyses span historical patterns, current conditions, and future trajectories, with an optional executive summary provided for quick reference.</p>
       </div>
+
       <div class="background-divider"></div>
+
       <div class="background-image">
-     <img id="fieldMapThumb"
-       src="images/FieldCardMap_2021_96ppi.png"
-       srcset="images/FieldCardMap_2021_96ppi.png 1x, images/FieldCardMap_2021_192ppi.png 2x"
-  sizes="(max-width: 900px) 320px, 360px"
-       loading="lazy"
-       alt="Field Map of Camp Atterbury" />
-        <div class="background-image-caption">Field Map of Camp Atterbury (2021)</div>
+        <img id="fieldMapThumb"
+          src="images/FieldCardMap_2021_96ppi.png"
+          srcset="images/FieldCardMap_2021_96ppi.png 1x, images/FieldCardMap_2021_96ppi.png 2x"
+          sizes="(max-width: 900px) 320px, 360px"
+          loading="lazy"
+          alt="Field Map of Camp Atterbury" />
+        <div class="background-image-caption">This field card map (2021) shows Camp Atterbury’s training landscape and 
+          installation boundary, providing spatial context for the analyses that follow.</div>
       </div>
     </div>
+  </section>
 
-    <script>
-      const fieldMapThumb = document.getElementById('fieldMapThumb');
-      if (fieldMapThumb) {
-        fieldMapThumb.addEventListener('click', function () {
-          let modal = document.createElement('div');
-          modal.style.position = 'fixed';
-          modal.style.top = 0;
-          modal.style.left = 0;
-          modal.style.width = '100vw';
-          modal.style.height = '100vh';
-          modal.style.background = 'rgba(0,0,0,0.7)';
-          modal.style.display = 'flex';
-          modal.style.alignItems = 'center';
-          modal.style.justifyContent = 'center';
-          modal.style.zIndex = 9999;
-          modal.innerHTML = `<div role="dialog" aria-label="Field map modal" style='background:#fff; padding:16px; border-radius:14px; max-width:96vw; max-height:96vh; overflow:auto;'>
-            <img src='images/FieldCardMap_2021_96ppi.png' alt='Field Map of Camp Atterbury (full size)' style='display:block; width:auto; height:auto; max-width:none; max-height:none; border-radius:10px; box-shadow:none;' />
-          </div>`;
-          modal.addEventListener('click', function () {
-            document.body.removeChild(modal);
-          });
-          document.body.appendChild(modal);
-        });
-      }
-    </script>
+  <!-- EXECUTIVE SUMMARY (Collapsed by default) -->
+  <section class="section" id="summary">
+    <div class="container">
+
+      <div class="summary-wrap" aria-label="Executive Summary">
+
+        <div class="summary-head">
+          <!-- Collapsible Header Button -->
+          <button class="summary-toggle" type="button" aria-expanded="false" aria-controls="summaryContent">
+            <span class="summary-toggle-title">Executive Summaries</span>
+            <span class="summary-toggle-icon" aria-hidden="true">▾</span>
+          </button>
+
+          <!-- Collapsible Content (starts collapsed) -->
+          <div class="summary-collapsible" id="summaryContent" hidden>
+
+            <p class="summary-intro">
+              A high-level synthesis of encroachment, priority species, and extreme weather impacts.
+            </p>
+            <p class="summary-instruction">
+              Explore any topic below, or scroll to the navigation buttons at the bottom of the page to continue through the full walkthrough.
+            </p>
+
+            <div class="summary-tabs" role="tablist" aria-label="Summary topics">
+              <button class="sum-tab" role="tab" aria-selected="false" aria-controls="sum-enc" id="tab-enc" data-tab="sum-enc">
+                Encroachment
+              </button>
+              <button class="sum-tab" role="tab" aria-selected="false" aria-controls="sum-spec" id="tab-spec" data-tab="sum-spec">
+                Priority Species
+              </button>
+              <button class="sum-tab" role="tab" aria-selected="false" aria-controls="sum-wx" id="tab-wx" data-tab="sum-wx">
+                Extreme Weather
+              </button>
+            </div>
+
+            <div class="summary-panel">
+
+              <div class="sum-content" role="tabpanel" hidden id="sum-enc" aria-labelledby="tab-enc">
+                <div class="sum-kicker">Encroachment</div>
+                <h3>Development pressure is reshaping the landscape surrounding Camp Atterbury.</h3>
+
+                <div class="sum-chips" aria-label="Key signals">
+                  <span class="chip">Boundary pressure</span>
+                  <span class="chip">Fragmentation</span>
+                  <span class="chip">Compatibility risk</span>
+                </div>
+
+                <p>
+                  Large interior training areas within Camp Atterbury have remained relatively protected from private development,
+                  while land use patterns in the surrounding counties have shifted steadily over time. Johnson County has experienced
+                  increasing suburban expansion, Bartholomew County has seen growth concentrated along the I-65 and U.S. Highway 31
+                  corridors, and Brown County has transitioned toward lower-density rural development. Together, these changes reduce
+                  landscape connectivity, increase fragmentation at the installation boundary, and elevate the potential for land use
+                  conflicts near training areas. As development continues outward, maintaining compatible land uses around the installation
+                  becomes increasingly complex.
+                </p>
+
+                <p class="why">
+                  <strong>Why this matters for Camp Atterbury:</strong>
+                  Encroachment at the boundary can constrain training flexibility, increase long-term management challenges, and limit opportunities
+                  to preserve compatible landscapes around the installation.
+                </p>
+
+                <a class="sum-cta" href="encroachment.html">Explore Encroachment →</a>
+              </div>
+
+              <div class="sum-content" role="tabpanel" hidden id="sum-spec" aria-labelledby="tab-spec">
+                <div class="sum-kicker">Priority Species</div>
+                <h3>Ecological value remains high, but habitat conditions vary across the surrounding counties.</h3>
+
+                <div class="sum-chips" aria-label="Key signals">
+                  <span class="chip">Habitat connectivity</span>
+                  <span class="chip">Fragmentation effects</span>
+                  <span class="chip">Persistence risk</span>
+                </div>
+
+                <p>
+                  Camp Atterbury supports large, intact blocks of forest, wetlands, and connected natural areas that provide important habitat
+                  for priority species. Outside the installation, land use change has altered habitat availability and connectivity in different ways
+                  across Johnson, Bartholomew, and Brown Counties. Suburban expansion, transportation infrastructure, and dispersed rural development
+                  introduce fragmentation that can isolate populations and reduce long-term habitat viability. As a result, areas of high ecological value
+                  do not always align with existing protected lands or current management boundaries.
+                </p>
+
+                <p class="why">
+                  <strong>Why this matters for Camp Atterbury:</strong>
+                  Sustaining priority species depends on conservation strategies that extend beyond the installation boundary and account for how surrounding
+                  land use patterns influence habitat persistence and connectivity.
+                </p>
+
+                <a class="sum-cta" href="priorityspecies.html">Explore Priority Species →</a>
+              </div>
+
+              <div class="sum-content" role="tabpanel" hidden id="sum-wx" aria-labelledby="tab-wx">
+                <div class="sum-kicker">Extreme Weather</div>
+                <h3>Operational risk is increasingly shaped by extreme events.</h3>
+
+                <div class="sum-chips" aria-label="Key signals">
+                  <span class="chip">Access disruptions</span>
+                  <span class="chip">Flood exposure</span>
+                  <span class="chip">Heat stress</span>
+                </div>
+
+                <p>
+                  Across Camp Atterbury and the surrounding counties, extreme weather events, particularly heavy rainfall and prolonged heat, are occurring in ways
+                  that directly affect training areas, access routes, and nearby communities. Intense rainfall can limit site access, increase flooding in low-lying
+                  training zones, and strain drainage systems influenced by surrounding land use patterns. Extended heat events place added stress on personnel,
+                  ecosystems, and infrastructure, amplifying operational challenges. Together, these pressures illustrate how extreme weather, interacting with ongoing
+                  land use change, shapes readiness and long-term resilience across the landscape.
+                </p>
+
+                <p class="why">
+                  <strong>Why this matters for Camp Atterbury:</strong>
+                  Extreme weather can disrupt training schedules, damage infrastructure, and increase recovery time, making proactive planning essential for sustained readiness.
+                </p>
+
+                <a class="sum-cta" href="extremeweather.html">Explore Extreme Weather →</a>
+              </div>
+
+            </div><!-- /.summary-panel -->
+          </div><!-- /#summaryContent -->
+        </div><!-- /.summary-head -->
+
+      </div><!-- /.summary-wrap -->
+    </div><!-- /.container -->
   </section>
 
   <div class="page-nav-buttons">
@@ -81,5 +183,6 @@
     <a href="encroachment.html" class="nav-btn">Encroachment  →</a>
   </div>
 
+  <script src="background.js"></script>
 </body>
 </html>
