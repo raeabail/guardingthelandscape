@@ -136,7 +136,7 @@ if (parallaxElements.length) {
         "Flat Rock Creek floodplain mapping near Camp Atterbury's eastern boundary, illustrating how tributary flooding and localized stormwater drainage affect training access roads and buffer zone infrastructure."
       ],
       "2020s": "Areas surrounding Camp Atterbury's perimeter where floodplains, storm pathways, impervious surfaces, and access routes intersect, illustrating real-time operational exposure to multiple extreme weather hazards.",
-      "2050": "Use NOAA's Mapping For Resilience and Adaptation Tool above to explore future projections for extreme weather hazards. Type in <b>Johnson County, Bartholomew County, or Brown County</b> to see forecasts for flooding, wildfire, extreme heat, and drought impacts. Choose between two emission scenarios (<b>Lower Emissions</b> or <b>Higher Emissions</b>) and time periods: <b>early century (2015-2044), mid century (2035-2064), or late century (2070-2099)</b>. A user guide is available: https://resilience.climate.gov/pages/user-guide"
+      "2050": "Use NOAA's Mapping For Resilience and Adaptation Tool above to explore future projections for extreme weather hazards. Type in <b>Johnson County, Bartholomew County, or Brown County</b> to see forecasts for flooding, wildfire, extreme heat, and drought impacts. Choose between two emission scenarios (<b>Lower Emissions</b> or <b>Higher Emissions</b>) and time periods: <b>early century (2015-2044), mid century (2035-2064), or late century (2070-2099)</b>. Make tool full screen for access to all features. A user guide is available: https://resilience.climate.gov/pages/user-guide"
     };
 
     const captionEl = document.getElementById("mapCaption");
