@@ -114,10 +114,10 @@ if (parallaxElements.length) {
     const MAP_CAPTIONS = {
       "pre1940": "Historical plat maps from the 1920s–1940s reveal a pre-establishment landscape of small farms, pastures, scattered woodlots, and rural communities. Together with the forested hills of Brown County, these areas provided suitable roosting and foraging habitat for Indiana and Northern long-eared bats prior to Camp Atterbury’s establishment.",
       "1940s": "The 1960 aerial (left) captures Atterbury’s preserved interior forests during the installation’s early decades. Modern land cover (right) shows increased surrounding development, emphasizing Atterbury’s role in maintaining intact bat habitat.",
-      "1967": "Late 1990s surveys at Camp Atterbury identified multiple Indiana bat maternity colonies. Figure shows mapped primary and alternate roost trees documented through 1997–2002 mist-netting and radio-telemetry studies, revealing core summer habitat along Nineveh Creek, the Driftwood River, and wooded corridors near the multi-impact training range.",
-      "2000s": "Land-cover change from 2000 (left) to 2010 (right) shows rapid suburban growth in Johnson County, shrinking forest blocks and increasing fragmentation near Franklin, Whiteland, and Edinburgh.",
-      "2015": "The Northern long-eared bat was listed as threatened in 2015 (endangered in 2023) due to white-nose syndrome and habitat loss. This change coincided with rising development pressures around Camp Atterbury, increasing ESA compliance needs as forest corridors narrowed.",
-      "2050": "Projected changes in habitat suitability for the Indiana bat under multiple scenarios through mid-century. Red areas indicate regions where suitable habitat is expected to contract, expand, or shift over time as environmental conditions change."
+      "1967": "Late 1990s surveys at Camp Atterbury identified multiple Indiana bat maternity colonies. Figure shows mapped habitat documented through 1997–2002 mist-netting and radio-telemetry studies, revealing core summer habitat along Nineveh Creek, the Driftwood River, and wooded corridors near the multi-impact training range.",
+      "2000s": "Use the timeline slider to compare land-cover change between 2000 and 2010, revealing rapid suburban growth in Johnson County that shrank forest blocks and increased fragmentation near Franklin, Whiteland, and Edinburgh.",
+      "2015": "The Northern long-eared bat was listed as threatened in 2015 (endangered in 2023) due to white-nose syndrome and habitat loss. This change coincided with rising development pressures around Camp Atterbury, potentially increasing ESA compliance needs as forest corridors narrowed. The Indiana bat, listed as endangered since 1967, continues to face similar risks from fragmentation and roost tree loss across the region.",
+      "2050": "Forecasted losses (dark blue) and gains (red) in environmentally suitable habitat for Indiana bat maternity colonies, modeled across four GCM/emissions scenario combinations and four future time periods."
     };
 
     const captionEl = document.getElementById("mapCaption");
@@ -140,9 +140,20 @@ if (parallaxElements.length) {
   if (!stepEl) return;
 
   const step = stepEl.dataset.step;
-  const src = MAPS[step]; // <-- Must read from MAPS BEFORE using it
-
   if (captionEl) captionEl.classList.remove("visible");
+
+  const MAPS = {
+    "pre1940": "https://experience.arcgis.com/experience/99a1d7cc48714142adfa1aa41d5a649d",
+    "1940s": "https://experience.arcgis.com/experience/4d4c96d5e44a4caaaffb0b7eee5fd166",
+    "1967": "https://experience.arcgis.com/experience/28a01ecb94b94e93ad0bb80da2c37f90",
+    "2000s": "https://experience.arcgis.com/experience/409e917dd6fd435da9eb6067fe5c1aa6",
+    "2015": "images/endangeredlistings.png",
+    "2050": "images/indianabat_futurescenarios.png"
+  };
+
+  const src = MAPS[step];
+  
+  if (!src) return; // Exit if no map defined for this step
 
   // If it's an image (PNG/JPG/etc), load it as an <img>
   if (src.match(/\.(png|jpg|jpeg|webp)$/i)) {
@@ -174,16 +185,6 @@ if (parallaxElements.length) {
     }, FADE_DURATION);
   }
 }
-
-    // ⬇️ Set your map URLs for each timeline step
-    const MAPS = {
-      "pre1940": "https://experience.arcgis.com/experience/99a1d7cc48714142adfa1aa41d5a649d",
-      "1940s": "https://experience.arcgis.com/experience/095b6a4ddec8428f80b7263adaa69232",
-      "1967": "https://experience.arcgis.com/experience/28a01ecb94b94e93ad0bb80da2c37f90",
-      "2000s": "https://experience.arcgis.com/experience/409e917dd6fd435da9eb6067fe5c1aa6",
-      "2015": "images/NLEB.png",
-      "2050": "images/indianabat_futurescenarios.jpg"
-    };
 
   function pickActiveStep() {
     const stickyMap = document.querySelector(".sticky-map");
