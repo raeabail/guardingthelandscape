@@ -115,29 +115,65 @@ a:hover {
 	border-color: #fff;
 }
 
+/* Top nav adapts earlier for half-width desktop windows */
+@media (max-width:1200px) {
+  .site-header {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 4%;
+  }
+  .logo-link {
+    margin: 0 auto;
+  }
+  .main-nav {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .main-nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.25;
+    min-height: 46px;
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width:640px) {
+  .main-nav {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---------------------------------------------------------
 	 4. INDEX/LANDING PAGE
 --------------------------------------------------------- */
 /* Disable scrolling ONLY on index page */
 .index-page {
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
+  background-color: #3f4432;
 }
 
 .hero-landing {
-	position: relative;
-	height: 100vh;
-	overflow: hidden;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  position: relative;
+  min-height: calc(100vh - 86px); /* adjust to your nav height */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-bg {
-	position: absolute;
-	inset: 0;
-	background: url('images/aerial-atterbury.jpg') center/cover no-repeat;
-	animation: bgZoom 15s ease-in-out infinite alternate;
+  position: absolute;
+  inset: 0;
+  background: url('images/campatterbury_livetraining.jpg') center center / 100% 100% no-repeat;
+  background-color: #3f4432;
+  animation: bgZoom 15s ease-in-out infinite alternate;
 }
 
 @keyframes bgZoom {
@@ -292,7 +328,7 @@ background-text {
 --------------------------------------------------------- */
 .intro-section {
 	position: relative;
-	background: linear-gradient(rgba(255,255,255,0.93), rgba(255,255,255,0.93)), url('images/aerial-atterbury.jpg') center/cover no-repeat;
+	background: linear-gradient(rgba(255,255,255,0.93), rgba(255,255,255,0.93)), url('images/campatterbury_livetraining.jpg') center/cover no-repeat;
 	border-radius: 0 0 14px 14px;
 	box-shadow: 0 6px 28px rgba(6,10,18,0.06);
 	text-align: left;
@@ -334,13 +370,29 @@ background-text {
 }
 
 .intro-text {
-	max-width: 880px;
-	margin: 0 auto;
-	text-align: center;
-	background: rgba(255,255,255,0.95);
-	border-radius: 14px;
-	padding: 36px 44px;
-	box-shadow: 0 6px 28px rgba(6,10,18,0.06);
+  max-width: 880px;
+  margin: 0 auto;
+  text-align: left;
+  background: rgba(255,255,255,0.95);
+  border-radius: 14px;
+  padding: 36px 44px;
+  box-shadow: 0 6px 28px rgba(6,10,18,0.06);
+}
+
+.intro-text p {
+  margin-bottom: 18px;
+  line-height: 1.7;
+}
+
+.intro-text .bullets {
+  text-align: left;
+  margin: 18px 0 22px 24px;
+  padding-left: 18px;
+}
+
+.intro-text .bullets li {
+  margin-bottom: 8px;
+  line-height: 1.6;
 }
 
 /* ---------------------------------------------------------
@@ -719,6 +771,13 @@ background-text {
 	color: var(--olive-dark);
 	animation: bounce 2s infinite;
 	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.data-source {
+  text-align: center;
+  font-size: 0.9em;
+  color: #6b8e23;
+  margin-top: 10px;
 }
 
 /* ---------------------------------------------------------
@@ -1590,18 +1649,57 @@ img:fullscreen {
 ========================================================= */
 
 .eva-cite {
-  font-size: 0.75rem;
-  background: #e3eee5;
-  border-radius: 4px;
-  padding: 2px 5px;
-  color: #3a513c;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-left: 6px;
   cursor: help;
-  border: 1px solid #d0ded3;
+  background: none;
+  border: 1px solid #5f775c;
+  border-radius: 50%;
+  padding: 0;
+  color: #3a513c;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
   position: relative;
+  vertical-align: middle;
 }
 
-.eva-cite:hover {
-  background: #d6e7d8;
+.eva-cite::after {
+  content: "i";
+}
+
+.eva-cite:hover,
+.eva-cite:focus-visible {
+  background: #e6efe4;
+  border-color: #3a513c;
+  outline: none;
+}
+
+.eva-cite:hover::before,
+.eva-cite:focus-visible::before {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 260px;
+  max-width: 360px;
+  background: #1f2a22;
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.35;
+  text-align: left;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.24);
+  z-index: 25;
+  white-space: normal;
+  pointer-events: none;
 }
 
 /* =========================================================
@@ -2077,17 +2175,40 @@ img:fullscreen {
 		padding: 64px 4% 24px;
 	}
 	.site-header {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
 		padding: 10px 4%;
 	}
+  .logo-link {
+    margin: 0 auto;
+  }
 	.site-logo {
 		height: 48px;
 	}
+  .main-nav {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .main-nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 46px;
+    padding: 10px 12px;
+  }
 	.background-flex {
 		flex-direction: column;
 	}
 }
 
 @media (max-width:480px) {
+  .main-nav {
+    grid-template-columns: 1fr;
+  }
 	.sticky-map {
 		height: 260px;
 	}
