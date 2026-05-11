@@ -395,6 +395,17 @@ background-text {
   line-height: 1.6;
 }
 
+.card-front {
+  position: relative;
+}
+
+.photo-credit-tooltip {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 20;
+}
+
 /* ---------------------------------------------------------
    ENHANCED VISUAL ELEMENTS FOR ENCROACHMENT PAGE
 --------------------------------------------------------- */
@@ -2354,6 +2365,11 @@ img:fullscreen {
 .featured-species .lede { margin: .25rem 0 2rem; color: #475569; font-size: 1.05rem; text-align: center; }
 .species-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
 .species-card { perspective: 1200px; }
+.centered-species-card {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(100%, 560px);
+}
 .flip { position: relative; width: 100%; border: none; background: transparent; padding: 0; cursor: pointer; height: 420px; }
 .card-face { border-radius: 1rem; box-shadow: 0 10px 25px rgba(0,0,0,.08); height: 100%; width: 100%; overflow: hidden; backface-visibility: hidden; transform-style: preserve-3d; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
 .card-front { background-size: cover; background-position: center; display: flex; align-items: flex-end; justify-content: center; position: relative; }
